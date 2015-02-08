@@ -11,6 +11,7 @@
 	* for a topic
 	* for a user
 * find customized trends
+* add new user
 
 # Model
 * message
