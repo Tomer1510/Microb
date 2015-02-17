@@ -17,8 +17,10 @@ public interface AppConstants {
 	public final String NAME = "name";
 	public final Type CUSTOMER_COLLECTION = new TypeToken<Collection<User>>() {}.getType();
 	//derby constants
+	//j
 	public final String DB_NAME = "UserDB";
-	public final String DB_DATASOURCE = "java:comp/env/jdbc/UserDatasource";
+	public final String DB_DATASOURCE = "java:comp/env/jdbc/UserDB";
+			//java:comp/env/jdbc:derby://localhost:1527/UserDB;create=true;user=me;password=mine";
 	public final String PROTOCOL = "jdbc:derby:"; 
 	//sql statements
 	public final String CREATE_USER_TABLE = "CREATE TABLE Users(Username varchar(10),"
@@ -30,4 +32,12 @@ public interface AppConstants {
 	public final String SELECT_ALL_CUSTOMERS_STMT = "SELECT * FROM CUSTOMER";
 	public final String SELECT_USER_BY_USERNAME_STMT = "SELECT COUNT(*) as cnt FROM Users "
 			+ "WHERE Username=?";
+	public final String SELECT_USER_BY_NICKNAME_STMT = "SELECT COUNT(*) as cnt FROM Users "
+			+ "WHERE Nickname=?";
+	public final String SELECT_USER_BY_STMT = "SELECT COUNT(*) as cnt FROM Users "
+			+ "WHERE ?=?";
+	public final String LOGIN_AUTHENTICATION = "SELECT COUNT(*) as cnt FROM Users WHERE Username=? AND Password=?";
+	public final int SESSION_TTL = 30*5;
+
+	
 }

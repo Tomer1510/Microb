@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context>
+    <!-- Default set of monitored resources -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+ <Resource name="jdbc/UserDB" auth="Container" type="javax.sql.DataSource" driverClassName="org.apache.derby.jdbc.ClientDriver" url="jdbc:derby://127.0.0.1:1527/UserDB;create=true" maxActive="20" maxIdle="10" maxWait="-1"/>
+
+</Context>

@@ -57,12 +57,10 @@ public class InitialDB implements ServletContextListener {
     	ServletContext cntx = event.getServletContext();
     	
     	try{
-    		
     		//obtain CustomerDB data source from Tomcat's context
     		Context context = new InitialContext();
     		BasicDataSource ds = (BasicDataSource)context.lookup(AppConstants.DB_DATASOURCE);
     		Connection conn = ds.getConnection();
-    		
     		boolean created = false;
     		try{
     			//create Users table
