@@ -1,19 +1,68 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 
-<form method="post" action="RegisterUser">
-	<input type="text" name="Username" placeholder="Username" /><br>
-	<input type="password" name="Password" placeholder="Password" /><br>
-	<input type="text" name="Nickname" placeholder="Nick Name" /><br>
-	<input type="text" name="Discription" placeholder="Short Discription" /><br>
-	<input type="text" name="ProfileImage" placeholder="Profile Image URL" /><br>
-	<input type="submit" value="register">
-</form>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="js/script.js"></script>
+    <title>MICROB ~ viral network</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="css/styles.css">
+	<script src="js/register.js"></script>
+  </head>
 
-</body>
+  <body>
+ 	<div class = "row" id="navbar"></div>
+    <div class = "container-fluid">
+    	<div id="sidebar"></div>
+      
+	
+     
+      <div class = "col-xs-4">
+        <h1>Register</h1>
+        <br><br>
+		<form id="register_form" method="post" action="RegisterUser" >
+			<ul id="register_errors">
+				<li id="username_error">Username taken or invalid</li>
+				<li id="nickname_error">Nickname taken or invalid</li>
+			</ul>
+			<div id="register_username">
+				<input type="text" name="Username" placeholder="Username" class="form-control"/>
+				<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+				<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>		
+				<br>
+				
+			</div><br>
+			
+			<div id="register_password">
+				<input type="password" name="Password" placeholder="Password" class="form-control"/><br>
+			</div><br>
+			
+			<div id="register_nickname">
+				<input type="text" name="Nickname" placeholder="Nick Name" class="form-control"/>
+				<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+				<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>			
+				<br>
+			</div><br>
+			
+			<div id="register_description">
+				<input type="text" name="Description" placeholder="Short Description" class="form-control"/><br>
+			</div><br>
+			
+			<div id="register_profileimage">
+				<input type="text" name="ProfileImage" placeholder="Profile Image URL" class="form-control"/><br>
+			</div><br>
+			<button type="button" id="do_register" class="btn btn-default">Register</button>		
+		</form>
+      </div>
+    
+  	</div>
+
+
+
+  </body>
 </html>

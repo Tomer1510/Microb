@@ -1,0 +1,55 @@
+.navbar-brand {
+	min-height:100px;
+}
+
+.row {
+	margin-left: 0;
+	margin-right: 15px;
+}
+
+.navbar-action {
+	margin-left: 8px;
+}
+
+.navbar { 
+	margin-bottom: 40px
+}
+
+.navbar-right {
+	margin-right: 15px;
+}
+
+#register_form > input[type="text"] {
+	
+}
+
+
+.navbar > .container-fluid .navbar-brand {
+	margin-left: 12px;
+}
+
+#register_errors li {
+	display: none;
+	color: red;
+}
+
+#register_form > div {
+	position: relative;
+}
+
+#register_form .glyphicon-ok, #register_form .glyphicon-remove {
+	display: none;
+}
+
+#register_errors {
+	margin-bottom: 30px;
+}
+
+
+#loggedin {
+	display: none;
+}
+
+form[role="login"] {
+	
+}

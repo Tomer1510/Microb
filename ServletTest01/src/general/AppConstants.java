@@ -30,4 +30,9 @@ public interface AppConstants {
 	public final String SELECT_ALL_CUSTOMERS_STMT = "SELECT * FROM CUSTOMER";
 	public final String SELECT_USER_BY_USERNAME_STMT = "SELECT COUNT(*) as cnt FROM Users "
 			+ "WHERE Username=?";
+	public final String SELECT_USER_BY_NICKNAME_STMT = "SELECT COUNT(*) as cnt FROM Users "
+			+ "WHERE Nickname=?";
+	public final String SELECT_USER_BY_STMT = "SELECT COUNT(*) as cnt FROM Users "
+			+ "WHERE ?=?";
+	public final String LOGIN_AUTHENTICATION = "SELECT COUNT(*) as cnt FROM Users WHERE Username=? AND Password=?";
 }

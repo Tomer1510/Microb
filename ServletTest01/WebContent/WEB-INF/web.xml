@@ -29,6 +29,16 @@
     <servlet-class>servlets.RegisterUser</servlet-class>
   </servlet>
   <servlet-mapping>
+    <servlet-name>IsAvailableForRegistration</servlet-name>
+    <url-pattern>/checkAvailablity</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>IsAvailableForRegistration</display-name>
+    <servlet-name>IsAvailableForRegistration</servlet-name>
+    <servlet-class>servlets.IsAvailableForRegistration</servlet-class>
+  </servlet>
+  <servlet-mapping>
     <servlet-name>RegisterUser</servlet-name>
     <url-pattern>/RegisterUser</url-pattern>
   </servlet-mapping>
