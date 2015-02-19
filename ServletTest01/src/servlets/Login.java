@@ -27,7 +27,6 @@ import general.AppConstants;
 public class Login extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
-    private static final int sessionMaxTime = 30*5;
  
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
@@ -56,10 +55,7 @@ public class Login extends HttpServlet {
 	        if(res.getInt(1) == 1){
 	            HttpSession session = request.getSession();
 	            session.setAttribute("username", username);
-	            session.setMaxInactiveInterval(sessionMaxTime);
-	            Cookie userName = new Cookie("username", username);
-	            userName.setMaxAge(sessionMaxTime);
-	            response.addCookie(userName);
+	            session.setMaxInactiveInterval(AppConstants.SESSION_TTL);	       
 	            PrintWriter out= response.getWriter();
 	            out.println("SUCCESS");
 	        }else{

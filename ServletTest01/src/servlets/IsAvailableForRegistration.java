@@ -63,14 +63,12 @@ public class IsAvailableForRegistration extends HttpServlet {
     		ResultSet res = pstmt.executeQuery();
     		res.next();
     		if(res.getInt(1) == 0) {
-    			System.out.println("AVAILABLE");
     			response.getWriter().println("AVAILABLE");
     			pstmt.close();
     			conn.close();
     			return;
     			
     		} else {
-    			System.out.println("TAKEN");
     			response.getWriter().println("TAKEN");
     			pstmt.close();
     			conn.close();

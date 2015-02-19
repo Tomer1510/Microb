@@ -12,6 +12,7 @@ import model.User;
  */
 public interface AppConstants {
 
+	public final int SESSION_TTL = 60*10; //10 Minutes
 	public final String CUSTOMERS = "customers";
 	public final String CUSTOMERS_FILE = CUSTOMERS + ".json";
 	public final String NAME = "name";

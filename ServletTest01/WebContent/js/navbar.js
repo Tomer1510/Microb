@@ -14,6 +14,7 @@ var navbar_init = function() {
 		else {
 			$("#loggedin").show();
 			$('form[role="login"]').hide();
+			$("#navbar #register").hide();
 			$("#navbar-username").html(ret.trim());
 		}
 	});

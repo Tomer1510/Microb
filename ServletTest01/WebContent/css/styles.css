@@ -1,10 +1,12 @@
+html, body {
+	height: 100%;
+}
 .navbar-brand {
 	min-height:100px;
 }
 
 .row {
 	margin-left: 0;
-	margin-right: 15px;
 }
 
 .navbar-action {
@@ -52,4 +54,21 @@
 
 form[role="login"] {
 	
+}
+
+#sidebar .logo {
+	margin-bottom: 45px;
+	margin-left: 8px;
+}
+
+#sidebar {
+	float: left;	
+	padding-top: 20px;
+	background: rgba(0, 155, 255, 0.4);
+	height: 100%;
+	min-height: 500px;
+}
+
+#navbar {
+	float: left;
 }
