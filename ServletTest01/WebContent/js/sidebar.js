@@ -1,7 +1,8 @@
 function sidebar_init() {
-	if (window.location.pathname.indexOf('index.html') !== -1)
+	var current_page = get_current_page();
+	if (current_page === "index.html" || current_page === "")
 			$("#sidebar li[data-page='home']").addClass('active');
-	if (window.location.pathname.indexOf('messages.html') !== -1)
+	if (current_page === "messages.html")
 		$("#sidebar li[data-page='inbox']").addClass('active');
 		
 }
