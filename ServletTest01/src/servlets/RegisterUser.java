@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
 import general.AppConstants;
+import general.servletResult;
 
 /**
  * Servlet implementation class RegisterUser
@@ -58,7 +59,8 @@ public class RegisterUser extends HttpServlet {
     		if(res.getInt(1) != 0)
     		{
     			System.out.println("User already exist");
-    			response.getWriter().println("User already exist");
+    			servletResult result = new servletResult("User already exist");
+    			response.getWriter().println(result.getJSONResult());
     			conn.close();
 
     			return;
@@ -79,7 +81,8 @@ public class RegisterUser extends HttpServlet {
 			conn.close();
 
     		System.out.println("Registered user");
-    		response.getWriter().println("SUCCESS");
+    		servletResult result = new servletResult("SUCCESS");
+			response.getWriter().println(result.getJSONResult());
     		
     		
 		} catch (SQLException | NamingException e) {

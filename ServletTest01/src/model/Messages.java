@@ -1,8 +1,8 @@
 package model;
 
-public class Message {
+public class Messages {
 
-	public Message() {
+	public Messages() {
 		// TODO Auto-generated constructor stub
 	}
 

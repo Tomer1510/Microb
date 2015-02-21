@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
 import general.AppConstants;
+import general.servletResult;
 
 /**
  * Servlet implementation class RegisterUser
@@ -46,7 +47,8 @@ public class IsAvailableForRegistration extends HttpServlet {
     		String field = request.getParameter("field");
     		if ( (!field.equals("Nickname") && !field.equals("Username")) || request.getParameter("value")==null )
     		{
-    			response.getWriter().println("Invalid request");
+    			servletResult result = new servletResult("Invalid request");
+    			response.getWriter().println(result.getJSONResult());
     			System.out.println("Invalid request");
     			return;
     		}
@@ -63,13 +65,15 @@ public class IsAvailableForRegistration extends HttpServlet {
     		ResultSet res = pstmt.executeQuery();
     		res.next();
     		if(res.getInt(1) == 0) {
-    			response.getWriter().println("AVAILABLE");
+    			servletResult result = new servletResult("AVAILABLE");
+    			response.getWriter().println(result.getJSONResult());
     			pstmt.close();
     			conn.close();
     			return;
     			
     		} else {
-    			response.getWriter().println("TAKEN");
+    			servletResult result = new servletResult("TAKEN");
+    			response.getWriter().println(result.getJSONResult());
     			pstmt.close();
     			conn.close();
     			return;

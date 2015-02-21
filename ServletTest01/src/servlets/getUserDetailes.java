@@ -1,6 +1,8 @@
 package servlets;
 
 import general.AppConstants;
+import general.convertToJSON;
+import general.servletResult;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,8 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 import model.Users;
 
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
-
-import com.google.gson.Gson;
 
 /**
  * Servlet implementation class getUserDetailes
@@ -51,7 +51,8 @@ public class getUserDetailes extends HttpServlet {
     		String field = request.getParameter("field");
     		if ( (!field.equals("Nickname") && !field.equals("Username")) || request.getParameter("value")==null )
     		{
-    			response.getWriter().println("Invalid request");
+    			servletResult result = new servletResult("Invalid request");
+    			response.getWriter().println(result.getJSONResult());
     			System.out.println("Invalid request");
     			return;
     		}
@@ -70,11 +71,8 @@ public class getUserDetailes extends HttpServlet {
     		
     		Users resultUser = new Users(res.getString(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5));
     		
-    		Gson gson = new Gson();
-        	String userJsonResult = gson.toJson(resultUser, AppConstants.USER_GSON_TYPE);
-
-        	PrintWriter writer = response.getWriter();
-        	writer.println(userJsonResult);
+    		PrintWriter writer = response.getWriter();
+        	writer.println(convertToJSON.doConvert(resultUser));
         	writer.close();
     		
     		

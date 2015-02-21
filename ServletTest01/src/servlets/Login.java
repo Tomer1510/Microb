@@ -1,6 +1,5 @@
 package servlets;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,10 +8,8 @@ import java.sql.SQLException;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
 import general.AppConstants;
+import general.servletResult;
 
 
 @WebServlet("/Login")
@@ -40,8 +38,8 @@ public class Login extends HttpServlet {
 	        String password = request.getParameter("password");
 	        if (username == null || password == null)
 	        {
-	        	 PrintWriter out= response.getWriter();
-		         out.println("INVALID");
+	        	servletResult result = new servletResult("INVALID");
+    			response.getWriter().println(result.getJSONResult());
 	        }
 	        PreparedStatement pstmt;
     		
@@ -56,11 +54,11 @@ public class Login extends HttpServlet {
 	            HttpSession session = request.getSession();
 	            session.setAttribute("username", username);
 	            session.setMaxInactiveInterval(AppConstants.SESSION_TTL);	       
-	            PrintWriter out= response.getWriter();
-	            out.println("SUCCESS");
+	            servletResult result = new servletResult("SUCCESS");
+    			response.getWriter().println(result.getJSONResult());
 	        }else{
-	            PrintWriter out= response.getWriter();
-	            out.println("FAIL");
+	        	servletResult result = new servletResult("FAIL");
+    			response.getWriter().println(result.getJSONResult());
 	            return;
 	        }
     	} catch (SQLException | NamingException e) {
