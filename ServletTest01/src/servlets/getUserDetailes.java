@@ -1,6 +1,9 @@
 package servlets;
 
+import general.AppConstants;
+
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,20 +17,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Users;
+
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
-import general.AppConstants;
+import com.google.gson.Gson;
 
 /**
- * Servlet implementation class RegisterUser
+ * Servlet implementation class getUserDetailes
  */
-public class RegisterUser extends HttpServlet {
+public class getUserDetailes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterUser() {
+    public getUserDetailes() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,43 +48,34 @@ public class RegisterUser extends HttpServlet {
     		BasicDataSource ds = (BasicDataSource)context.lookup(AppConstants.DB_DATASOURCE);
     		Connection conn = ds.getConnection();
     		
-    		String username = request.getParameter("Username");
-    		String password = request.getParameter("Password");
-    		String nickname = request.getParameter("Nickname");
-    		String description = request.getParameter("Description");
-    		String profileImage = request.getParameter("ProfileImage");
-    		
-    		PreparedStatement pstmt = conn.prepareStatement(AppConstants.COUNT_USER_BY_USERNAME_STMT);
-    		
-    		pstmt.setString(1, username);
-    		
-    		ResultSet res = pstmt.executeQuery();
-    		res.next();
-    		if(res.getInt(1) != 0)
+    		String field = request.getParameter("field");
+    		if ( (!field.equals("Nickname") && !field.equals("Username")) || request.getParameter("value")==null )
     		{
-    			System.out.println("User already exist");
-    			response.getWriter().println("User already exist");
-    			conn.close();
-
+    			response.getWriter().println("Invalid request");
+    			System.out.println("Invalid request");
     			return;
     		}
     		
-    		pstmt = conn.prepareStatement(AppConstants.INSERT_USER_STMT);
+    		String value = request.getParameter("value");
+    		PreparedStatement pstmt;
+    		if (field.equals("Username")) {
+    			pstmt = conn.prepareStatement(AppConstants.SELECT_USER_BY_USERNAME_STMT);
+    		} else {
+    			pstmt = conn.prepareStatement(AppConstants.SELECT_USER_BY_NICKNAME_STMT);
+    		}
     		
-    		pstmt.setString(1, username);
-    		pstmt.setString(2, password);
-    		pstmt.setString(3, nickname);
-    		pstmt.setString(4, description);
-    		pstmt.setString(5, profileImage);
+    		pstmt.setString(1, value);
+    		ResultSet res = pstmt.executeQuery();
+    		res.next();
     		
-    		pstmt.executeUpdate();
+    		Users resultUser = new Users(res.getString(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5));
     		
-    		conn.commit();
-    		pstmt.close();
-			conn.close();
+    		Gson gson = new Gson();
+        	String userJsonResult = gson.toJson(resultUser, AppConstants.USER_GSON_TYPE);
 
-    		System.out.println("Registered user");
-    		response.getWriter().println("SUCCESS");
+        	PrintWriter writer = response.getWriter();
+        	writer.println(userJsonResult);
+        	writer.close();
     		
     		
 		} catch (SQLException | NamingException e) {

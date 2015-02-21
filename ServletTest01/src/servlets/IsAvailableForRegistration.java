@@ -54,9 +54,9 @@ public class IsAvailableForRegistration extends HttpServlet {
     		String value = request.getParameter("value");
     		PreparedStatement pstmt;
     		if (field.equals("Username")) {
-    			pstmt = conn.prepareStatement(AppConstants.SELECT_USER_BY_USERNAME_STMT);
+    			pstmt = conn.prepareStatement(AppConstants.COUNT_USER_BY_USERNAME_STMT);
     		} else {
-    			pstmt = conn.prepareStatement(AppConstants.SELECT_USER_BY_NICKNAME_STMT);
+    			pstmt = conn.prepareStatement(AppConstants.COUNT_USER_BY_NICKNAME_STMT);
     		}
     		
     		pstmt.setString(1, value);

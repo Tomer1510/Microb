@@ -9,14 +9,14 @@ import java.net.URL;
  * @author sean
  *
  */
-public class User {
+public class Users {
 
 	private String Username, Password, NickName, Description;
 	private URL ProfileImage;
 	private int ID;
 	static public int IDcounter = 0;
 
-	public User(String username, String pass, String nickName, String description, String imageURL) {
+	public Users(String username, String pass, String nickName, String description, String imageURL) {
 		// TODO Auto-generated constructor stub
 		this.Username = username;
 		this.Password = pass;
@@ -28,9 +28,9 @@ public class User {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.ID = User.IDcounter;
+		this.ID = Users.IDcounter;
 		
-		User.IDcounter++;
+		Users.IDcounter++;
 	}
 
 	public String getUsername() {
