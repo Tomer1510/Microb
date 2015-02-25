@@ -14,23 +14,26 @@ $(document).ready(function(){
 			eval(field.toLowerCase()+"_ok=false;");
 		}
 		else {
-			$.post("checkAvailablity", {field: field, value: value}, function(output){
-				if (output.trim()=="AVAILABLE") {
-					$("#register_"+field.toLowerCase()).attr('class', 'has-feedback has-success');
-					$("#"+field.toLowerCase()+"_error").hide();
-					(this_).parent().children(".glyphicon-ok").show();
-					(this_).parent().children(".glyphicon-remove").hide();
-					eval(field.toLowerCase()+"_ok=true;");
-					
-				} else if (output.trim()=="TAKEN") {
-					$("#register_"+field.toLowerCase()).attr('class', 'has-feedback has-error');
-					(this_).parent().children(".glyphicon-ok").hide();
-					(this_).parent().children(".glyphicon-remove").show();
-					eval(field.toLowerCase()+"_ok=false;");
-
-	
+			$.ajax({
+				dataType: 'json',
+				type:'POST',
+				url:"checkAvailablity", 
+				data: {field: field, value: value},
+				success: function(result){
+					if (result['result']=="AVAILABLE") {
+						$("#register_"+field.toLowerCase()).attr('class', 'has-feedback has-success');
+						$("#"+field.toLowerCase()+"_error").hide();
+						(this_).parent().children(".glyphicon-ok").show();
+						(this_).parent().children(".glyphicon-remove").hide();
+						eval(field.toLowerCase()+"_ok=true;");
+						
+					} else if (result['result']=="TAKEN") {
+						$("#register_"+field.toLowerCase()).attr('class', 'has-feedback has-error');
+						(this_).parent().children(".glyphicon-ok").hide();
+						(this_).parent().children(".glyphicon-remove").show();
+						eval(field.toLowerCase()+"_ok=false;");
+					}
 				}
-			
 			});
 		}
 		
@@ -49,14 +52,20 @@ $(document).ready(function(){
 			$("#register_form input").each(function(){
 				parms[$(this).attr('name')] = $(this).val();
 			});
-			$.post("RegisterUser", parms, function(ret){
-				if (ret.trim() == "SUCCESS") {
-					//TODO: LOGIN CODE
-					window.location = "index.html?msg=registered&status=success"
-				}
-				else {
-					alert("An unexpected error occured: "+ret.trim());
-				}
+			$.ajax({
+				dataType: 'json',
+				type:'POST', 
+				url:"RegisterUser", 
+				data: parms, 
+				success: function(ret){
+					if (ret['result'] == "SUCCESS") {
+						//TODO: LOGIN CODE
+						window.location = "index.html?msg=registered&status=success";
+					}
+					else {
+						alert("An unexpected error occured: "+ret['result']);
+					}
+				} 
 			});
 		}
 	});

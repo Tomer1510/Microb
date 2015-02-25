@@ -40,12 +40,12 @@
   </resource-ref>
   <servlet>
     <description></description>
-    <display-name>getUserDetailes</display-name>
-    <servlet-name>getUserDetailes</servlet-name>
-    <servlet-class>servlets.getUserDetailes</servlet-class>
+    <display-name>GetUserDetails</display-name>
+    <servlet-name>GetUserDetails</servlet-name>
+    <servlet-class>servlets.GetUserDetails</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>getUserDetailes</servlet-name>
-    <url-pattern>/getUserDetailes</url-pattern>
+    <servlet-name>GetUserDetails</servlet-name>
+    <url-pattern>/GetUserDetails</url-pattern>
   </servlet-mapping>
 </web-app>

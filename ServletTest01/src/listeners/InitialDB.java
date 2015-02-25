@@ -1,6 +1,7 @@
 package listeners;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -10,6 +11,8 @@ import javax.naming.NamingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+
+import java.sql.PreparedStatement;
 
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
@@ -45,11 +48,37 @@ public class InitialDB implements ServletContextListener {
         }
         return exists;
     }
+    
+    public void getColumns(ServletContextEvent event, String table) {
+    	ServletContext cntx = event.getServletContext();
+    	
+		try{
+			//obtain CustomerDB data source from Tomcat's context
+			Context context = new InitialContext();
+			BasicDataSource ds = (BasicDataSource)context.lookup(AppConstants.DB_DATASOURCE);
+			Connection conn = ds.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(AppConstants.GET_COLUMNS);
+			pstmt.setString(1, table);
+			ResultSet res = pstmt.executeQuery();
+			
+			while (res.next()) {
+				System.out.println(res.getString(1) +"\t"+res.getString(2));
+			}
+			//commit update
+			conn.close();
 
-	/**
-     * @see ServletContextListener#contextInitialized(ServletContextEvent)
-     */
-    public void contextInitialized(ServletContextEvent event)  { 
+    		
+		}catch (SQLException | NamingException e){
+    		System.out.println("ERROR");
+    		cntx.log("Error during database initialization",e);
+			
+		}
+		//close connection
+
+    }
+    
+    
+    public void createTable(ServletContextEvent event, String stmt_str) {
     	ServletContext cntx = event.getServletContext();
     	
     	try{
@@ -59,33 +88,37 @@ public class InitialDB implements ServletContextListener {
     		BasicDataSource ds = (BasicDataSource)context.lookup(AppConstants.DB_DATASOURCE);
     		Connection conn = ds.getConnection();
     		
-    		boolean created = false;
     		try{
     			//create Users table
     			Statement stmt = conn.createStatement();
-    			stmt.executeUpdate(AppConstants.CREATE_USER_TABLE);
-    			
-    			//stmt.executeUpdate("DROP TABLE User");
+    			stmt.executeUpdate(stmt_str);
     			
     			//commit update
-        		conn.commit();
-        		stmt.close();
-    		}catch (SQLException e){
+    			conn.commit();
+    			stmt.close();
+    			conn.close();
+    		} catch (SQLException e){
     			//check if exception thrown since table was already created (so we created the database already 
     			//in the past
-    			created = tableAlreadyExists(e);
+    			boolean created = tableAlreadyExists(e);
     			if (!created){
     				throw e;//re-throw the exception so it will be caught in the
     				//external try..catch and recorded as error in the log
     			}
     		}
-    		//close connection
-    		conn.close();
-
     	} catch (SQLException | NamingException e) {
     		//log error 
     		cntx.log("Error during database initialization",e);
     	}
+    }
+    
+	/**
+     * @see ServletContextListener#contextInitialized(ServletContextEvent)
+     */
+    public void contextInitialized(ServletContextEvent event)  { 
+    	createTable(event, AppConstants.CREATE_USER_TABLE);
+    	createTable(event, AppConstants.CREATE_MESSAGES_TABLE);
+
     }
 	
 }

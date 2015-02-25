@@ -3,19 +3,26 @@ var navbar_init = function() {
 	$("body").on('click', 'form[role="login"] > button', function(){
 		var username = $(this).parent().find('input[name="Username"]').val();
 		var password = $(this).parent().find('input[name="Password"]').val();
-		$.post('Login', {username: username, password: password}, function(ret){
-			window.location = window.location;
+		$.ajax({
+			url: 'Login', 
+			type: 'POST',
+			dataType: 'json',
+			data: {username: username, password: password}, 
+			success: function(ret){
+				window.location = window.location;
+			}
 		});
 	});
 	
-	$.get("IsLoggedIn", function(ret){
-		if (ret.trim() === "FALSE") 
+	$.getJSON("IsLoggedIn", function(ret){
+		if (!eval(ret['result'])) 
 			$('form[role="login"]').show();
 		else {
 			$("#loggedin").show();
 			$('form[role="login"]').hide();
 			$("#navbar #register").hide();
-			$("#navbar-username").html(ret.trim());
+			$("#navbar-username").html(ret['value']);
+			window.username=ret['value'];
 		}
 	});
 	

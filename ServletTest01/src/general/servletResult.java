@@ -5,10 +5,17 @@ import general.convertToJSON;
 public class servletResult {
 	
 	private String result;
+	private String value;
 	
 	public servletResult(String result)
 	{
 		this.result = result;
+	}
+	
+	public servletResult(String result, String value)
+	{
+		this.result = result;
+		this.value = value;
 	}
 	
 	public String getResult()

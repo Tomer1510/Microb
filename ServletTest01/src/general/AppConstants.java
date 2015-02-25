@@ -31,13 +31,24 @@ public interface AppConstants {
 			+ "ProfileImage varchar(100))";
 	public final String INSERT_USER_STMT = "INSERT INTO Users VALUES(?,?,?,?,?)";
 	
+	public final String CREATE_MESSAGES_TABLE = "CREATE TABLE Messages(ID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
+			+ "AuthorNickname varchar(10),"
+			+ "Content varchar(200),"
+			+ "Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,"
+			+ "CONSTRAINT primary_key PRIMARY KEY (ID))";
+	public final String INSERT_MESSAGE_STMT = "INSERT INTO Messages(AuthorNickname, Content) VALUES(?,?)";
+	public final String GET_COLUMNS = "select TABLENAME,COLUMNNAME, t.*  FROM sys.systables t, sys.syscolumns  WHERE TABLEID = REFERENCEID ";
+	
 	// SQL SELECT
 	public final String SELECT_ALL_CUSTOMERS_STMT = "SELECT * FROM CUSTOMER";
 	public final String SELECT_USER_BY_USERNAME_STMT = "SELECT * FROM Users "
 			+ "WHERE Username=?";
 	public final String SELECT_USER_BY_NICKNAME_STMT = "SELECT * FROM Users "
 			+ "WHERE Nickname=?";
-	
+
+	public final String SELECT_MESSAGE_BY_ID_STMT = "SELECT * FROM Messages WHERE ID=?";
+	public final String SELECT_MESSAGE_BY_USERNAME_STMT = "SELECT * FROM Messages WHERE AuthorNickname=? ORDER BY Timestamp DESC";
+
 	// SQL COUNT
 	public final String COUNT_USER_BY_USERNAME_STMT = "SELECT COUNT(*) as cnt FROM Users "
 			+ "WHERE Username=?";

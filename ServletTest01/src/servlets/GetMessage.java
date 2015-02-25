@@ -10,29 +10,33 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import model.Users;
+import model.Messages;
 
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
-/**
- * Servlet implementation class getUserDetailes
- */
-public class getUserDetailes extends HttpServlet {
+@WebServlet("/GetMessage")
+
+public class GetMessage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public getUserDetailes() {
+    public GetMessage() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,41 +44,43 @@ public class getUserDetailes extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		 String field = request.getParameter("field");
+		 String value = request.getParameter("value");
+		 if (field == null || value == null) {
+			PrintWriter writer = response.getWriter();
+         	writer.println(( new servletResult("false") ).getJSONResult());
+         	writer.close();
+         	return;
+		 }
 		try{
 			Context context = new InitialContext();
     		BasicDataSource ds = (BasicDataSource)context.lookup(AppConstants.DB_DATASOURCE);
     		Connection conn = ds.getConnection();
-    		
-    		String field = request.getParameter("field");
-    		if ( (!field.equals("Nickname") && !field.equals("Username")) || request.getParameter("value")==null )
-    		{
-    			servletResult result = new servletResult("Invalid request");
-    			response.getWriter().println(result.getJSONResult());
-    			System.out.println("Invalid request");
-    			return;
-    		}
-    		
-    		String value = request.getParameter("value");
     		PreparedStatement pstmt;
-    		if (field.equals("Username")) {
-    			pstmt = conn.prepareStatement(AppConstants.SELECT_USER_BY_USERNAME_STMT);
-    		} else {
-    			pstmt = conn.prepareStatement(AppConstants.SELECT_USER_BY_NICKNAME_STMT);
+    		switch (field) {
+    			case "username":	pstmt = conn.prepareStatement(AppConstants.SELECT_MESSAGE_BY_USERNAME_STMT); pstmt.setString(1, value);
+    				break;
+    			case "id":  pstmt = conn.prepareStatement(AppConstants.SELECT_MESSAGE_BY_ID_STMT); pstmt.setInt(1, Integer.parseInt(value));
+    				break;
+    				
+    			default: return;
+
     		}
     		
-    		pstmt.setString(1, value);
     		ResultSet res = pstmt.executeQuery();
-    		res.next();
-    		
-    		Users resultUser = new Users(res.getString(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5));
-    		
+    		List<Messages> messages = new ArrayList<Messages>(); 
+    		while(res.next()) {
+    			Messages resultMessage = new Messages(res.getInt(1), res.getString(2), res.getString(3), res.getTimestamp(4));
+    			messages.add(resultMessage);
+    		}
     		PrintWriter writer = response.getWriter();
-        	writer.println(convertToJSON.doConvert(resultUser));
+        	writer.println(convertToJSON.doConvert(messages));
         	writer.close();
+    		conn.close();
     		
+   
     		
 		} catch (SQLException | NamingException e) {
     		getServletContext().log("Error while closing connection", e);

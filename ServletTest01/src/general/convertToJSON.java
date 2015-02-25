@@ -1,8 +1,10 @@
 package general;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 import model.Users;
+import model.Messages;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -19,10 +21,13 @@ public class convertToJSON {
 		} else if(o instanceof Users)
 		{
 			gsonType = new TypeToken<Users>() {}.getType();
-		}/* else if(o instanceof Messages)
+		} else if(o instanceof Messages)
 		{
-			
-		}*/ else
+			gsonType = new TypeToken<Messages>() {}.getType();
+		} else if(o instanceof ArrayList<?>)
+		{
+			gsonType = new TypeToken<ArrayList<Messages>>() {}.getType();
+		} else
 		{
 			return "";
 		}

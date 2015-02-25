@@ -21,10 +21,10 @@ public class IsLoggedIn extends HttpServlet {
 	    HttpSession session = request.getSession();
 	    String username = (String)session.getAttribute("username");
 	    if (username != null) {
-	    	servletResult result = new servletResult(username);
+	    	servletResult result = new servletResult("true", username);
 			response.getWriter().println(result.getJSONResult());
 	    } else {
-	    	servletResult result = new servletResult("FALSE");
+	    	servletResult result = new servletResult("false");
 			response.getWriter().println(result.getJSONResult());
 	        return;
 	    }

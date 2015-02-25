@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="js/script.js"></script>
+    <title>MICROB ~ viral network</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="css/styles.css">
+	<script src="js/navbar.js"></script>
+	<script src="js/sidebar.js"></script>
+	<script src="js/messages.js"></script>
+  </head>
+
+  <body>
+  	<div id="sidebar" class="col-md-2"></div>
+  
+	<div class = "col-md-10 row" id="navbar"></div>
+    	
+  	<div class = "container-fluid" id="messages">
+  		<button class="btn btn-default" type="button" class="composeNewMessage" data-toggle="modal" data-target="#newPM">Send Message</button>
+		<br>
+     
+      
+  	</div>
+
+
+	<!-- Modal -->
+<div class="modal fade" id="newPM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">New message</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+            <label for="recipient-name" class="control-label">Recipient:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="message-text" class="control-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="sendPM">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </body>
+</html>
