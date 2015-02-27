@@ -15,15 +15,15 @@ var navbar_init = function() {
 		});
 	});
 	
-	$.getJSON("IsLoggedIn", function(ret){
-		if (!eval(ret['result'])) 
+	isLoggedIn(function(ret){
+		if (ret === false) 
 			$('form[role="login"]').show();
-		else {
+		else if (ret === true){
 			$("#loggedin").show();
 			$('form[role="login"]').hide();
 			$("#navbar #register").hide();
 			$("#navbar-username").html(ret['value']);
-			window.username=ret['value'];
+			window.nickname=ret['value'];
 		}
 	});
 	
@@ -33,23 +33,14 @@ var navbar_init = function() {
 		if(text.indexOf('@') !== -1 && text.indexOf('@') !== text.length-1) {
 			$(".post-autocomplete li").remove();
 			var keyword = text.slice(text.indexOf('@')+1);
-			$.ajax({
-				url: 'SearchUsers',
-				type: 'POST',
-				dataType: 'json',
-				data: {
-					keyword: keyword
-				},
-				success: function(users) {
-					if (users.length === 0)
-						$(".post-autocomplete").hide();
-					else
-						$(".post-autocomplete").show();
-					$.each(users, function(i, user){
-						$(".post-autocomplete").append("<li>"+user.NickName+"</li>");
-					});
-				}, 
-				async: false
+			searchUsers(keyword, function(users){
+				if (users.length === 0)
+					$(".post-autocomplete").hide();
+				else
+					$(".post-autocomplete").show();
+				$.each(users, function(i, user){
+					$(".post-autocomplete").append("<li>"+user.NickName+"</li>");
+				});
 			});
 		} 
 		else
@@ -63,14 +54,12 @@ var navbar_init = function() {
 		$("#navbar input[name=content]").val(text);
 		$(".post-autocomplete").hide();
 		mentions.push({nickname: nickname, start: text.length - nickname.length, end: text.length});
-		console.log(mentions);
 		
 	});
 	
 	$("#post-form").submit(function(){
 		var text = $("#navbar input[name=content]").val();
 		mentions.forEach(function(user, i){
-			console.log(text.substring(user.start, user.end));
 			if (text.substring(user.start, user.end) !== user.nickname)
 				mentions.splice(i, 1);
 		});

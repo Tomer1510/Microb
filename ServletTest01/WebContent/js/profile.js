@@ -4,17 +4,15 @@ $(document).ready(function(){
 	
 	if (urlParams.nickname === undefined && urlParams.username === undefined)
 		urlParams.username =  $.ajax({type: 'get', dataType: 'json', url: "IsLoggedIn", success: function(ret){return ret}, async: false }).responseJSON.value;
-	$.ajax({
-		url: 'GetUserDetails',
-		type: 'POST',
-		dataType: 'json',
-		data: {
-			field: (urlParams.nickname === undefined)?"Username":"Nickname", 
-			value: (urlParams.nickname === undefined)?urlParams.username:urlParams.nickname
-		},
-		success: function(ret) {
-			$("#user_details .follow").text(isFollowing(ret["NickName"])?"Unfollow":"Follow");
+	
+	var field = (urlParams.nickname === undefined)?"Username":"Nickname", 
+			value = (urlParams.nickname === undefined)?urlParams.username:urlParams.nickname;
+	getUserDetails(field, value, function(ret){		
+			isFollowing(ret["NickName"], function(following){
+				$("#user_details .follow").text(following?"Unfollow":"Follow");
+			});
 			
+		
 			$("#user_details .follow").data('nickname', ret["NickName"]);
 			if (ret.result === undefined) {
 				var table = $("#user_details tbody");
@@ -40,12 +38,9 @@ $(document).ready(function(){
 					 }
 				 });
 			}
-		}
 	});
 	
 	
-	
-	 
 	
 	
 });

@@ -43,14 +43,17 @@ var urlParams;
        urlParams[decode(match[1])] = decode(match[2]);
 })();
 
-function isFollowing(nickname) {
-	return eval($.ajax({
+function isFollowing(nickname, callback) {
+	$.ajax({
 		 type: 'post', 
 		 dataType: 'json',
 		 url: "IsFollowing", 
 		 data: {nickname: nickname}, 
-		 async: false
-	 }).responseJSON.value);
+		 success: function(ret){
+			 if (typeof callback === "function")
+				 callback(eval(ret.value))
+		 }
+	 });
 }
 
 
@@ -66,4 +69,43 @@ function addMessage(message) {
 	
 	document.getElementById('messages').innerHTML += newMsg;
 		
+}
+
+function isLoggedIn(callback) {
+	$.getJSON("IsLoggedIn", function(ret){
+		if (typeof callback === "function")
+			callback(eval(ret.result));
+	});
+}
+
+function searchUsers(keyword, callback) {
+	$.ajax({
+		url: 'SearchUsers',
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			keyword: keyword
+		},
+		success: function(users) {
+			if (typeof callback === "function")
+				callback(users);
+		}, 
+	});
+}
+
+
+function getUserDetails(field, value, callback) {
+	$.ajax({
+		url: 'GetUserDetails',
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			field: field,
+			value: value
+		},
+		success: function(ret) {
+			if (typeof callback === "function") 
+				callback(ret);
+		}
+	});
 }
