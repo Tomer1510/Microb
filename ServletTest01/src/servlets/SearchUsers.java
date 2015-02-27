@@ -24,19 +24,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Messages;
+import model.Users;
 
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
-@WebServlet("/GetMessage")
+@WebServlet("/SearchUsers")
 
-public class GetMessage extends HttpServlet {
+public class SearchUsers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetMessage() {
+    public SearchUsers() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,11 +44,10 @@ public class GetMessage extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		 String field = request.getParameter("field");
-		 String value = request.getParameter("value");
-		 if (field == null || value == null) {
+		String keyword = request.getParameter("keyword");
+		if (keyword == null) {
 			PrintWriter writer = response.getWriter();
          	writer.println(( new servletResult("false") ).getJSONResult());
          	writer.close();
@@ -58,25 +57,15 @@ public class GetMessage extends HttpServlet {
 			Context context = new InitialContext();
     		BasicDataSource ds = (BasicDataSource)context.lookup(AppConstants.DB_DATASOURCE);
     		Connection conn = ds.getConnection();
-    		PreparedStatement pstmt;
-    		switch (field) {
-    			case "nickname":	pstmt = conn.prepareStatement(AppConstants.SELECT_MESSAGE_BY_NICKNAME_STMT); pstmt.setString(1, value);
-    				break;
-    			case "id":  pstmt = conn.prepareStatement(AppConstants.SELECT_MESSAGE_BY_ID_STMT); pstmt.setInt(1, Integer.parseInt(value));
-    				break;
-    				
-    			default: return;
-
-    		}
-    		
+    		PreparedStatement pstmt = conn.prepareStatement(String.format(AppConstants.SEARCH_USERS_BY_NICKNAME, keyword)); 
     		ResultSet res = pstmt.executeQuery();
-    		List<Messages> messages = new ArrayList<Messages>(); 
+    		List<Users> users = new ArrayList<Users>(); 
     		while(res.next()) {
-    			Messages resultMessage = new Messages(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getTimestamp(5));
-    			messages.add(resultMessage);
+    			Users user = new Users(res.getString(1), res.getString(3), res.getString(4), res.getString(5));
+    			users.add(user);
     		}
     		PrintWriter writer = response.getWriter();
-        	writer.println(convertToJSON.doConvert(messages));
+        	writer.println(convertToJSON.doConvert(users));
         	writer.close();
     		conn.close();
     		

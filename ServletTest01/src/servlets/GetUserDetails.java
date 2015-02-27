@@ -75,7 +75,7 @@ public class GetUserDetails extends HttpServlet {
             	return;
     		}
     		
-    		Users resultUser = new Users(res.getString(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5));
+    		Users resultUser = new Users(res.getString(1), res.getString(3), res.getString(4), res.getString(5));
     		
     		PrintWriter writer = response.getWriter();
         	writer.println(convertToJSON.doConvert(resultUser));

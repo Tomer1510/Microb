@@ -11,8 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -24,19 +22,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Messages;
+import model.Users;
 
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
-@WebServlet("/GetMessage")
+@WebServlet("/IsFollowing")
 
-public class GetMessage extends HttpServlet {
+public class IsFollowing extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetMessage() {
+    public IsFollowing() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,11 +42,12 @@ public class GetMessage extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		 String field = request.getParameter("field");
-		 String value = request.getParameter("value");
-		 if (field == null || value == null) {
+		 HttpSession session = request.getSession();
+		 String sourceNickname = (String)session.getAttribute("nickname");
+		 String targetNickname = request.getParameter("nickname");
+		 if (sourceNickname == null || targetNickname == null) {
 			PrintWriter writer = response.getWriter();
          	writer.println(( new servletResult("false") ).getJSONResult());
          	writer.close();
@@ -58,29 +57,31 @@ public class GetMessage extends HttpServlet {
 			Context context = new InitialContext();
     		BasicDataSource ds = (BasicDataSource)context.lookup(AppConstants.DB_DATASOURCE);
     		Connection conn = ds.getConnection();
-    		PreparedStatement pstmt;
-    		switch (field) {
-    			case "nickname":	pstmt = conn.prepareStatement(AppConstants.SELECT_MESSAGE_BY_NICKNAME_STMT); pstmt.setString(1, value);
-    				break;
-    			case "id":  pstmt = conn.prepareStatement(AppConstants.SELECT_MESSAGE_BY_ID_STMT); pstmt.setInt(1, Integer.parseInt(value));
-    				break;
-    				
-    			default: return;
-
-    		}
     		
+ 
+    		PreparedStatement pstmt = conn.prepareStatement(AppConstants.SELECT_FOLLOWING);
+    		
+    		pstmt.setString(1, sourceNickname);
+    		pstmt.setString(2, targetNickname);
+    	
     		ResultSet res = pstmt.executeQuery();
-    		List<Messages> messages = new ArrayList<Messages>(); 
-    		while(res.next()) {
-    			Messages resultMessage = new Messages(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getTimestamp(5));
-    			messages.add(resultMessage);
-    		}
-    		PrintWriter writer = response.getWriter();
-        	writer.println(convertToJSON.doConvert(messages));
-        	writer.close();
-    		conn.close();
     		
-   
+    		
+    		if (res.next() != false && res.getInt(1) != 0) {
+    			servletResult result = new servletResult("true", "true");
+        		PrintWriter writer = response.getWriter();
+            	writer.println(result.getJSONResult());
+            	writer.close();
+    		} else {
+    			servletResult result = new servletResult("true", "false");
+        		PrintWriter writer = response.getWriter();
+            	writer.println(result.getJSONResult());
+            	writer.close();
+    		}
+    		
+    		pstmt.close();		   		
+    		conn.commit();   		
+    		conn.close();
     		
 		} catch (SQLException | NamingException e) {
     		getServletContext().log("Error while closing connection", e);

@@ -12,9 +12,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import java.sql.PreparedStatement;
-
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
+import java.sql.PreparedStatement;
 
 import general.AppConstants;
 
@@ -49,26 +48,41 @@ public class InitialDB implements ServletContextListener {
         return exists;
     }
     
-    public void getColumns(ServletContextEvent event, String table) {
-    	ServletContext cntx = event.getServletContext();
+    
+    public void dropTable(Connection conn, ServletContext cntx, String table) {
     	
-		try{
+    	try {
 			//obtain CustomerDB data source from Tomcat's context
-			Context context = new InitialContext();
-			BasicDataSource ds = (BasicDataSource)context.lookup(AppConstants.DB_DATASOURCE);
-			Connection conn = ds.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(AppConstants.GET_COLUMNS);
-			pstmt.setString(1, table);
-			ResultSet res = pstmt.executeQuery();
+			PreparedStatement pstmt = conn.prepareStatement("DROP TABLE "+table);
 			
-			while (res.next()) {
-				System.out.println(res.getString(1) +"\t"+res.getString(2));
-			}
-			//commit update
-			conn.close();
+			pstmt.executeUpdate();
+			
 
     		
-		}catch (SQLException | NamingException e){
+		}catch (SQLException e){
+    		System.out.println("ERROR");
+    		cntx.log("Error during database initialization",e);
+			
+		} 
+		//close connection
+
+    }
+    
+    
+    public void getColumns(Connection conn, ServletContext cntx, String table) {
+    	
+    	try {
+			//obtain CustomerDB data source from Tomcat's context
+			PreparedStatement pstmt = conn.prepareStatement(AppConstants.GET_COLUMNS_BY_TABLE);
+			pstmt.setString(1, table);
+			pstmt.executeUpdate();
+			
+			conn.commit();
+			pstmt.close();
+		
+
+    		
+		}catch (SQLException e){
     		System.out.println("ERROR");
     		cntx.log("Error during database initialization",e);
 			
@@ -78,16 +92,8 @@ public class InitialDB implements ServletContextListener {
     }
     
     
-    public void createTable(ServletContextEvent event, String stmt_str) {
-    	ServletContext cntx = event.getServletContext();
-    	
-    	try{
-    		
-    		//obtain CustomerDB data source from Tomcat's context
-    		Context context = new InitialContext();
-    		BasicDataSource ds = (BasicDataSource)context.lookup(AppConstants.DB_DATASOURCE);
-    		Connection conn = ds.getConnection();
-    		
+    public void createTable(Connection conn, ServletContext cntx, String stmt_str) {
+       				
     		try{
     			//create Users table
     			Statement stmt = conn.createStatement();
@@ -96,29 +102,40 @@ public class InitialDB implements ServletContextListener {
     			//commit update
     			conn.commit();
     			stmt.close();
-    			conn.close();
+    			
     		} catch (SQLException e){
     			//check if exception thrown since table was already created (so we created the database already 
     			//in the past
     			boolean created = tableAlreadyExists(e);
     			if (!created){
-    				throw e;//re-throw the exception so it will be caught in the
-    				//external try..catch and recorded as error in the log
+    				cntx.log("Error during database initialization",e);
     			}
     		}
-    	} catch (SQLException | NamingException e) {
-    		//log error 
-    		cntx.log("Error during database initialization",e);
-    	}
+    	
     }
     
 	/**
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
     public void contextInitialized(ServletContextEvent event)  { 
-    	createTable(event, AppConstants.CREATE_USER_TABLE);
-    	createTable(event, AppConstants.CREATE_MESSAGES_TABLE);
-
+    	
+    	ServletContext cntx = event.getServletContext();    	
+    	try{   		
+    		//obtain CustomerDB data source from Tomcat's context
+    		Context context = new InitialContext();
+    		BasicDataSource ds = (BasicDataSource)context.lookup(AppConstants.DB_DATASOURCE);
+    		Connection conn = ds.getConnection();
+    		dropTable(conn, cntx, "MESSAGES");
+    		//dropTable(conn, cntx, "FOLLOWING");
+	    	createTable(conn, cntx, AppConstants.CREATE_FOLLOWING_TABLE);	
+	    	createTable(conn, cntx, AppConstants.CREATE_USER_TABLE);
+	    	createTable(conn, cntx, AppConstants.CREATE_MESSAGES_TABLE);
+	    	conn.commit();
+	    	conn.close();
+    	} catch (SQLException | NamingException e) {
+    		//log error 
+    		cntx.log("Error during database initialization",e);
+    	}
     }
 	
 }

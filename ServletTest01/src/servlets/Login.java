@@ -49,10 +49,10 @@ public class Login extends HttpServlet {
     		pstmt.setString(1, username);
     		pstmt.setString(2, password);
     		ResultSet res = pstmt.executeQuery();
-    		res.next();
-	        if(res.getInt(1) == 1){
+	        if(res.next() != false){
+	        	String nickname = res.getString(3);
 	            HttpSession session = request.getSession();
-	            session.setAttribute("username", username);
+	            session.setAttribute("nickname", nickname);
 	            session.setMaxInactiveInterval(AppConstants.SESSION_TTL);	       
 	            servletResult result = new servletResult("SUCCESS");
     			response.getWriter().println(result.getJSONResult());

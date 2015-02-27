@@ -98,7 +98,7 @@ td.space {
 	padding: 30px;
 }
 
-tr.space td {
+tr.space td, tr.noborder td {
 	border: none !important;
 }
 
@@ -112,9 +112,6 @@ tr.space td {
 	font-weight: bold;
 }
 
-#user_details tr:first-child td {
-	border: none;
-}
 
 .microb-content, #navbar {
 	background:	white;
@@ -155,4 +152,52 @@ h1, .title {
 	font-size: 50px;
   	-webkit-mask-image: -webkit-linear-gradient(top, rgba(208, 208, 208, 1), rgba(208, 208, 208, .5) 50%, rgba(208, 208, 208, 1));
 	-webkit-mask-image: linear-gradient(top, rgba(208, 208, 208, 1), rgba(208, 208, 208, .5) 50%, rgba(208, 208, 208, 1));
+}
+
+
+form[role="post"] {
+	width: 20%;
+	min-width: 150px;
+	margin: auto;
+}
+
+form[role="post"] .form-control {
+	float: right;
+	width: 80%;
+	position: relative;
+	top: 5px;
+}
+
+form[role="post"] input[type="submit"] {
+	float: right;
+	width: 20%;
+	position: relative;
+	top: 5px;
+}
+
+.post-autocomplete {
+	background: white;
+	position: absolute;
+	border: 1px #000000 solid;
+	top: 39px;
+	width: 222px;
+	border: 1px solid rgb(0, 0, 0);
+	padding-left: 0px;
+	z-index: 2;
+	display: none;
+}
+
+.post-autocomplete li {
+	
+	padding-left: 5px;
+	list-style-type: none;
+}
+
+
+.post-autocomplete li:hover {
+	background: #AAAAAA;
+}
+
+.mention {
+	color: #0007ed;
 }

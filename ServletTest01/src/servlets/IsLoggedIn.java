@@ -19,9 +19,9 @@ public class IsLoggedIn extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
  
 	    HttpSession session = request.getSession();
-	    String username = (String)session.getAttribute("username");
-	    if (username != null) {
-	    	servletResult result = new servletResult("true", username);
+	    String nickname = (String)session.getAttribute("nickname");
+	    if (nickname != null) {
+	    	servletResult result = new servletResult("true", nickname);
 			response.getWriter().println(result.getJSONResult());
 	    } else {
 	    	servletResult result = new servletResult("false");

@@ -11,15 +11,15 @@ import java.net.URL;
  */
 public class Users {
 
-	private String Username, Password, NickName, Description;
+	private String Username, NickName, Description;
 	private URL ProfileImage;
 	private int ID;
 	static public int IDcounter = 0;
 
-	public Users(String username, String pass, String nickName, String description, String imageURL) {
+	public Users(String username, String nickName, String description, String imageURL) {
 		// TODO Auto-generated constructor stub
 		this.Username = username;
-		this.Password = pass;
+		//this.Password = pass;
 		this.NickName = nickName;
 		this.Description = description;
 		try {
@@ -45,11 +45,11 @@ public class Users {
 		return IDcounter;
 	}
 	
-	public boolean isPassCorrect(String pass)
+	/*public boolean isPassCorrect(String pass)
 	{
 		if(this.Password.compareTo(pass) == 0) return true;
 		else return false;
-	}
+	}*/
 
 	public String getNickName() {
 		return NickName;
