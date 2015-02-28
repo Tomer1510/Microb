@@ -74,7 +74,7 @@ function addMessage(message) {
 function isLoggedIn(callback) {
 	$.getJSON("IsLoggedIn", function(ret){
 		if (typeof callback === "function")
-			callback(eval(ret.result));
+			callback(eval(ret.result), ret.value);
 	});
 }
 

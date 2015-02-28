@@ -15,15 +15,15 @@ var navbar_init = function() {
 		});
 	});
 	
-	isLoggedIn(function(ret){
+	isLoggedIn(function(ret, nickname){
 		if (ret === false) 
 			$('form[role="login"]').show();
 		else if (ret === true){
 			$("#loggedin").show();
 			$('form[role="login"]').hide();
 			$("#navbar #register").hide();
-			$("#navbar-username").html(ret['value']);
-			window.nickname=ret['value'];
+			$("#navbar-nickname").html(nickname);
+			window.nickname=nickname;
 		}
 	});
 	
