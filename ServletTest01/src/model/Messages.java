@@ -12,10 +12,13 @@ public class Messages {
 	private int republishCounter;
 	private String authorNickname, content;
 	private List<Mentions> mentions;
-	public Messages(int ID, String nickname, String content, String mentions, Timestamp timestamp, int republishCounter) {
+	private List<Topics> topics;
+	
+	public Messages(int ID, String nickname, String content, String mentions, String topics, Timestamp timestamp, int republishCounter) {
 		// TODO Auto-generated constructor stub
 		Gson gson = new Gson();
 	 	this.mentions = gson.fromJson(mentions, new TypeToken<List<Mentions>>(){}.getType());
+	 	this.topics = gson.fromJson(topics, new TypeToken<List<Topics>>(){}.getType());
 		this.messageID = ID;
 		this.authorNickname = nickname;
 		this.content = content;
@@ -45,5 +48,9 @@ public class Messages {
 
 	public int getRepublishCounter() {
 		return this.republishCounter;
+	}
+
+	public List<Topics> getTopics() {
+		return topics;
 	}
 }

@@ -78,4 +78,14 @@
     <servlet-name>GetTop10Following</servlet-name>
     <url-pattern>/GetTop10Following</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetMessagesOfTopic</display-name>
+    <servlet-name>GetMessagesOfTopic</servlet-name>
+    <servlet-class>servlets.GetMessagesOfTopic</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetMessagesOfTopic</servlet-name>
+    <url-pattern>/GetMessagesOfTopic</url-pattern>
+  </servlet-mapping>
 </web-app>

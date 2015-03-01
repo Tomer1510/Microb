@@ -35,6 +35,7 @@ public interface AppConstants {
 			+ "AuthorNickname varchar(10),"
 			+ "Content varchar(200),"
 			+ "Mentions varchar(200),"
+			+ "Topics varchar(200),"
 			+ "Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,"
 			+ "RepublishCounter INTEGER DEFAULT 0,"
 			+ "PRIMARY KEY (ID))";
@@ -70,6 +71,7 @@ public interface AppConstants {
 	public final String SELECT_MESSAGES_BY_FOLLOWING = "SELECT Messages.* FROM Following RIGHT JOIN Messages ON Following.FollowingNickname=Messages.AuthorNickname WHERE FollowerNickname=? "
 			+ "ORDER BY LOG(2+(SELECT COUNT(*) FROM Following WHERE FollowingNickname = Messages.AuthorNickname))*LOG(2+Messages.RepublishCounter) DESC";
 	public final String SEARCH_USERS_BY_NICKNAME = "SELECT * FROM Users WHERE Nickname LIKE '%%%s%%'";
+	public final String SEARCH_MESSAGE_BY_TOPIC = "";
 	public final String SELECT_TOP_FOLLOWING_BY_NICKNAME = "SELECT FollowingNickname FROM Following WHERE FollowerNickname = ? "
 			+ "ORDER BY LOG(2+(SELECT COUNT(*) FROM Following WHERE FollowerNickname = ?)) DESC";
 	public final String SELECT_TOP_FOLLOWER_BY_NICKNAME = "SELECT FollowerNickname FROM Following WHERE FollowingNickname = ? "
