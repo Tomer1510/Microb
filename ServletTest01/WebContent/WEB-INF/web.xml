@@ -58,4 +58,24 @@
     <servlet-name>Republish</servlet-name>
     <url-pattern>/Republish</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetTop10Followers</display-name>
+    <servlet-name>GetTop10Followers</servlet-name>
+    <servlet-class>servlets.GetTop10Followers</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetTop10Followers</servlet-name>
+    <url-pattern>/GetTop10Followers</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetTop10Following</display-name>
+    <servlet-name>GetTop10Following</servlet-name>
+    <servlet-class>servlets.GetTop10Following</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetTop10Following</servlet-name>
+    <url-pattern>/GetTop10Following</url-pattern>
+  </servlet-mapping>
 </web-app>

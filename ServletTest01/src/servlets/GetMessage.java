@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +21,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import model.Messages;
 
@@ -75,10 +73,12 @@ public class GetMessage extends HttpServlet {
     		}
     		
     		ResultSet res = pstmt.executeQuery();
-    		List<Messages> messages = new ArrayList<Messages>(); 
-    		while(res.next()) {
+    		List<Messages> messages = new ArrayList<Messages>();
+    		int i = 1;
+    		while(res.next() && i <= 10) {
     			Messages resultMessage = new Messages(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getTimestamp(5), res.getInt(6));
     			messages.add(resultMessage);
+    			i++;
     		}
     		PrintWriter writer = response.getWriter();
         	writer.println(convertToJSON.doConvert(messages));

@@ -33,4 +33,8 @@ public class servletResult {
 		this.result = result;
 	}
 
+	public String getValue() {
+		return value;
+	}
+
 }

@@ -9,18 +9,13 @@ import java.sql.SQLException;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
-
-import com.google.gson.Gson;
 
 import general.AppConstants;
 
@@ -39,7 +34,6 @@ public class UserInfo extends HttpServlet {
     		BasicDataSource ds = (BasicDataSource)context.lookup(AppConstants.DB_DATASOURCE);
     		Connection conn = ds.getConnection();
 	        String username = request.getParameter("username");
-	        String password = request.getParameter("password");
 	        if (username == null)
 	        {
 	        	 PrintWriter out = response.getWriter();
@@ -66,7 +60,6 @@ public class UserInfo extends HttpServlet {
 	            out.println("FAIL");
 	            return;
 	        }*/
-    		Gson gson;
     		System.out.println(res.toString());
     		response.getWriter().println("sadfasd");
     	} catch (SQLException | NamingException e) {

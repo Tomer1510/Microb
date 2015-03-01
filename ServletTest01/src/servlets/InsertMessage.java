@@ -1,7 +1,6 @@
 package servlets;
 
 import general.AppConstants;
-import general.convertToJSON;
 import general.servletResult;
 
 import com.google.gson.Gson;
@@ -14,7 +13,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.Context;
@@ -27,7 +25,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Users;
 import model.Mentions;
 
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;

@@ -17,25 +17,23 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Messages;
-
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
-@WebServlet("/GetFeed")
-
-public class GetFeed extends HttpServlet {
+/**
+ * Servlet implementation class GetTop10Followers
+ */
+public class GetTop10Following extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetFeed() {
+    public GetTop10Following() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -58,21 +56,21 @@ public class GetFeed extends HttpServlet {
     		BasicDataSource ds = (BasicDataSource)context.lookup(AppConstants.DB_DATASOURCE);
     		Connection conn = ds.getConnection();
     		
-    		PreparedStatement pstmt = conn.prepareStatement(AppConstants.SELECT_MESSAGES_BY_FOLLOWING); 
-    		//PreparedStatement pstmt = conn.prepareStatement(AppConstants.SELECT_ALL_MESSAGES_OF_NICKNAME_STMT); 
+    		PreparedStatement pstmt = conn.prepareStatement(AppConstants.SELECT_TOP_FOLLOWING_BY_NICKNAME);
     		pstmt.setString(1, nickname);
+    		pstmt.setString(2, nickname);
     		
     		ResultSet res = pstmt.executeQuery();
     		
-    		List<Messages> messages = new ArrayList<Messages>(); 
+    		List<servletResult> users = new ArrayList<servletResult>(); 
     		int i = 1;
     		while(res.next() && i <= 10) {
-    			Messages resultMessage = new Messages(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getTimestamp(5), res.getInt(6));
-    			messages.add(resultMessage);
+    			servletResult resultUser = new servletResult(res.getString(1));
+    			users.add(resultUser);
     			i++;
     		}
     		PrintWriter writer = response.getWriter();
-        	writer.println(convertToJSON.doConvert(messages));
+        	writer.println(convertToJSON.doConvert(users));
         	writer.close();
     		conn.close();
     		

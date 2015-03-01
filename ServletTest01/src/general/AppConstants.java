@@ -70,6 +70,10 @@ public interface AppConstants {
 	public final String SELECT_MESSAGES_BY_FOLLOWING = "SELECT Messages.* FROM Following RIGHT JOIN Messages ON Following.FollowingNickname=Messages.AuthorNickname WHERE FollowerNickname=? "
 			+ "ORDER BY LOG(2+(SELECT COUNT(*) FROM Following WHERE FollowingNickname = Messages.AuthorNickname))*LOG(2+Messages.RepublishCounter) DESC";
 	public final String SEARCH_USERS_BY_NICKNAME = "SELECT * FROM Users WHERE Nickname LIKE '%%%s%%'";
+	public final String SELECT_TOP_FOLLOWING_BY_NICKNAME = "SELECT FollowingNickname FROM Following WHERE FollowerNickname = ? "
+			+ "ORDER BY LOG(2+(SELECT COUNT(*) FROM Following WHERE FollowerNickname = ?)) DESC";
+	public final String SELECT_TOP_FOLLOWER_BY_NICKNAME = "SELECT FollowerNickname FROM Following WHERE FollowingNickname = ? "
+			+ "ORDER BY LOG(2+(SELECT COUNT(*) FROM Following WHERE FollowingNickname = ?)) DESC";
 	
 	/*  */
 	

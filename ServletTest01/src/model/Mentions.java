@@ -1,8 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Mentions {
 	private String nickname;
 	private int start, end;
