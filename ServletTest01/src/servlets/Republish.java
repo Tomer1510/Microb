@@ -41,10 +41,9 @@ public class Republish extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		HttpSession session = request.getSession();
-		 String nickname = (String)session.getAttribute("nickname");
 		 String messageID = request.getParameter("messageID");
 		
-		 if (nickname == null || messageID == null) {
+		 if (messageID == null) {
 			PrintWriter writer = response.getWriter();
         	writer.println(( new servletResult("false") ).getJSONResult());
         	writer.close();

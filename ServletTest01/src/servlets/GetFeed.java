@@ -58,13 +58,19 @@ public class GetFeed extends HttpServlet {
 			Context context = new InitialContext();
     		BasicDataSource ds = (BasicDataSource)context.lookup(AppConstants.DB_DATASOURCE);
     		Connection conn = ds.getConnection();
+    		
     		PreparedStatement pstmt = conn.prepareStatement(AppConstants.SELECT_MESSAGES_BY_FOLLOWING); 
+    		//PreparedStatement pstmt = conn.prepareStatement(AppConstants.SELECT_ALL_MESSAGES_OF_NICKNAME_STMT); 
     		pstmt.setString(1, nickname);
+    		
     		ResultSet res = pstmt.executeQuery();
+    		
     		List<Messages> messages = new ArrayList<Messages>(); 
-    		while(res.next()) {
-    			Messages resultMessage = new Messages(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getTimestamp(5));
+    		int i = 1;
+    		while(res.next() && i <= 10) {
+    			Messages resultMessage = new Messages(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getTimestamp(5), res.getInt(6));
     			messages.add(resultMessage);
+    			i++;
     		}
     		PrintWriter writer = response.getWriter();
         	writer.println(convertToJSON.doConvert(messages));

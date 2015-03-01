@@ -44,7 +44,12 @@ public class GetMessage extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    	doPost(request, response);
+    }
+    
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		 String field = request.getParameter("field");
 		 String value = request.getParameter("value");
@@ -72,7 +77,7 @@ public class GetMessage extends HttpServlet {
     		ResultSet res = pstmt.executeQuery();
     		List<Messages> messages = new ArrayList<Messages>(); 
     		while(res.next()) {
-    			Messages resultMessage = new Messages(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getTimestamp(5));
+    			Messages resultMessage = new Messages(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getTimestamp(5), res.getInt(6));
     			messages.add(resultMessage);
     		}
     		PrintWriter writer = response.getWriter();

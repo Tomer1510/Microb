@@ -48,4 +48,14 @@
     <servlet-name>GetUserDetails</servlet-name>
     <url-pattern>/GetUserDetails</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Republish</display-name>
+    <servlet-name>Republish</servlet-name>
+    <servlet-class>servlets.Republish</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Republish</servlet-name>
+    <url-pattern>/Republish</url-pattern>
+  </servlet-mapping>
 </web-app>

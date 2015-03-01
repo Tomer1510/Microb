@@ -13,9 +13,10 @@ import com.google.gson.reflect.TypeToken;
 public class Messages {
 	private Timestamp timestamp;
 	private int messageID;
+	private int republishCounter;
 	private String authorNickname, content;
 	private List<Mentions> mentions;
-	public Messages(int ID, String nickname, String content, String mentions, Timestamp timestamp) {
+	public Messages(int ID, String nickname, String content, String mentions, Timestamp timestamp, int republishCounter) {
 		// TODO Auto-generated constructor stub
 		Gson gson = new Gson();
 	 	this.mentions = gson.fromJson(mentions, new TypeToken<List<Mentions>>(){}.getType());
@@ -23,6 +24,7 @@ public class Messages {
 		this.authorNickname = nickname;
 		this.content = content;
 		this.timestamp = timestamp;
+		this.republishCounter = republishCounter;
 	}
 	
 	public String getTimestamp() {
@@ -43,5 +45,9 @@ public class Messages {
 	
 	public List<Mentions> getMentions() {
 		return this.mentions;
+	}
+
+	public int getRepublishCounter() {
+		return this.republishCounter;
 	}
 }
