@@ -1,7 +1,49 @@
+@font-face {
+  font-family: "FiraSans-mid";
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/fira-sans/FiraSans-MediumItalic.otf') format('opentype');
+}
+
+@font-face {
+  font-family: "FiraSans";
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/fira-sans/FiraSans-Italic.otf') format('opentype');
+}
+
+@font-face {
+  font-family: "FiraSans-bold";
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/fira-sans/FiraSans-BoldItalic.otf') format('opentype');
+}
+
+@font-face {
+  font-family: "FiraSans-boldNI";
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/fira-sans/FiraSans-Bold.otf') format('opentype');
+}
+
 html, body {
 	height: 100%;
-	background: rgba(242, 242, 242, 0.4);
+	background: rgba(242, 242, 242, 1);
+	color: rgb(22,66,41);
+	font-family: "FiraSans", Helvetica;
 }
+
+.sidebar-text {
+	margin-left: 5%;
+	font-family: "FiraSans-boldNI", Helvetica;
+	font-size: 24px;
+}
+
+a {
+	color: rgb(29,88,55);
+	font-family: "FiraSans-bold", Helvetica;
+}
+
 .navbar-brand {
 	min-height:100px;
 }
@@ -19,13 +61,21 @@ html, body {
 }
 
 .navbar-right {
-	margin-right: 15px;
+	/*margin-right: 1%;
+	margin-left: 10%;*/
+	padding-right: 15px;
+	float: inherit;
+	display: table-cell;
 }
 
 #register_form > input[type="text"] {
 	
 }
 
+.container-fluid {
+	padding-right: 0px;
+	padding-left: 0px;
+}
 
 .navbar > .container-fluid .navbar-brand {
 	margin-left: 12px;
@@ -58,8 +108,7 @@ form[role="login"] {
 }
 
 #sidebar .logo {
-	margin-bottom: 45px;
-	margin-left: 8px;
+	margin-bottom: 20px;
 }
 
 #sidebar {
@@ -115,14 +164,16 @@ tr.space td, tr.noborder td {
 
 .microb-content, #navbar {
 	background:	white;
-	-webkit-box-shadow: 0px 0px 14px 1px rgba(130,130,130,0.79);
-	-moz-box-shadow: 0px 0px 14px 1px rgba(130,130,130,0.79);
-	box-shadow: 0px 0px 14px 1px rgba(130,130,130,0.79);
+	-webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1);
+-moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1);
+box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1);
 }
 
 .microb-content {
 	margin-top: 2%;
 	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-bottom: 2%;
 }
 
 #sidebar {
@@ -146,12 +197,14 @@ li.active[role="presentation"] > a {
 	margin-right: auto !important;
 }
 
-h1, .title {
+h1 {
 	
-	color: rgb(190, 190, 190);
+	margin-top: 5px;
+	color: rgb(218, 218, 218);
 	font-size: 50px;
-  	-webkit-mask-image: -webkit-linear-gradient(top, rgba(208, 208, 208, 1), rgba(208, 208, 208, .5) 50%, rgba(208, 208, 208, 1));
-	-webkit-mask-image: linear-gradient(top, rgba(208, 208, 208, 1), rgba(208, 208, 208, .5) 50%, rgba(208, 208, 208, 1));
+	font-family: "FiraSans-mid", Helvetica;
+  	-webkit-mask-image: -webkit-radial-gradient(center, ellipse cover, rgb(242,242,242) 0%, rgb(218,218,218) 100%);
+	-webkit-mask-image: radial-gradient(ellipse at center, rgb(242,242,242) 0%, rgb(218,218,218) 100%);
 }
 
 
@@ -163,14 +216,14 @@ form[role="post"] {
 
 form[role="post"] .form-control {
 	float: right;
-	width: 80%;
+	width: 150%;
 	position: relative;
 	top: 5px;
 }
 
 form[role="post"] input[type="submit"] {
 	float: right;
-	width: 20%;
+	
 	position: relative;
 	top: 5px;
 }
@@ -200,4 +253,80 @@ form[role="post"] input[type="submit"] {
 
 .mention {
 	color: #0007ed;
+}
+
+.emboss {
+	-webkit-box-shadow: inset 0px 0px 40px 0px rgba(0,0,0,0.2);
+	-moz-box-shadow: inset 0px 0px 40px 0px rgba(0,0,0,0.2);
+	box-shadow: inset 0px 0px 40px 0px rgba(0,0,0,0.2);
+	margin-top: 2%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-bottom: 2%;
+	background: rgb(242,242,242);
+	
+}
+
+/* columns of same height styles */
+.row-same-height {
+    display: table;
+    width: 100%;
+    margin-top: 2%;
+}
+.col-md-height {
+    display: table-cell;
+    float: none !important;
+}
+
+@media (min-width: 768px) {
+    .col-sm-height {
+        display: table-cell;
+        float: none !important;
+    }
+}
+@media (min-width: 992px) {
+    .col-md-height {
+        display: table-cell;
+        float: none !important;
+    }
+}
+@media (min-width: 1200px) {
+    .col-lg-height {
+        display: table-cell;
+        float: none !important;
+    }
+}
+
+.horz-logo {
+	margin-left: 15%;
+	margin-right: 15%;
+	hight: 70%;
+	width: 70%;
+}
+
+.microb-discription {
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 15%;
+	font-size: 18pt;
+}
+
+.alot-of-text {
+	height: 100px;
+}
+
+.brand {
+	hight: 100%;
+	width: 100%;
+}
+
+.spanFormat
+{
+  text-align: left;
+  display: table-cell;
+  min-width: 10px;
+  padding-right: 10px;
+}
+
+.selector {
 }

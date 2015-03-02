@@ -1,75 +1,115 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-  	<link rel="icon" type="image/png" href="img/logo.png">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="js/script.js"></script>
-    <title>MICROB ~ viral network</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="css/styles.css">
-	<script src="js/register.js"></script>
-	<script src="js/navbar.js"></script>
-	<script src="js/sidebar.js"></script>
-	
-  </head>
+<head>
+<link rel="icon" type="image/png" href="img/logo.png">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="js/script.js"></script>
+<title>MICROB ~ viral network</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<!-- Bootstrap -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/styles.css">
+<script src="js/register.js"></script>
+<!--<script src="js/navbar.js"></script> -->
+<!--<script src="js/sidebar.js"></script> -->
 
-  <body>
-    
-	<div id="sidebar" class="col-md-2"></div>
-  
-	<div class = "col-md-10 row" id="navbar"></div>
-	
-    <div class = "container-fluid">
-      
-	
-     
-      <div class = "col-xs-4 microb-content center">
-        <h1>Register</h1>
-        <br><br>
-		<form id="register_form" method="post" action="RegisterUser" >
-			<ul id="register_errors">
-				<li id="username_error">Username taken or invalid</li>
-				<li id="nickname_error">Nickname taken or invalid</li>
-			</ul>
-			<div id="register_username">
-				<input type="text" name="Username" placeholder="Username" class="form-control"/>
-				<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-				<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>		
-				<br>
-				
-			</div><br>
-			
-			<div id="register_password">
-				<input type="password" name="Password" placeholder="Password" class="form-control"/><br>
-			</div><br>
-			
-			<div id="register_nickname">
-				<input type="text" name="Nickname" placeholder="Nick Name" class="form-control"/>
-				<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-				<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>			
-				<br>
-			</div><br>
-			
-			<div id="register_description">
-				<input type="text" name="Description" placeholder="Short Description" class="form-control"/><br>
-			</div><br>
-			
-			<div id="register_profileimage">
-				<input type="text" name="ProfileImage" placeholder="Profile Image URL" class="form-control"/><br>
-			</div><br>
-			<button type="button" id="do_register" class="btn btn-default">Register</button>		
-		</form>
-      </div>
-    
-  	</div>
+</head>
+
+<body>
+
+	<!--<div id="sidebar" class="col-md-2"></div>-->
+
+	<!--<div class = "col-md-10 row" id="navbar"></div>-->
+
+	<div class="container-fluid">
+
+		<div class="col-md-1"></div>
+		<div class="col-md-10 row row-same-height">
+			<div class="col-md-7 emboss col-md-height">
+				<div>
+					<img alt="logo" src="img/horz-logo.png" class = "horz-logo">
+				</div>
+				<div>
+					<form class="navbar-form navbar-right" role="login">
+						<div class="form-group">
+							<input name="Username" type="text" class="form-control"
+								placeholder="Username"> <input name="Password"
+								type="password" class="form-control" placeholder="Password">
+						</div>
+						<button type="button" class="btn btn-default">Submit</button>
+					</form>
+				</div>
+				<div>
+					<p class = "microb-discription">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget purus a erat vehicula malesuada quis eget mauris. Aliquam aliquet nisl nec ipsum rutrum, at dignissim lorem ullamcorper. Vivamus gravida rutrum ipsum, ac venenatis justo eleifend rhoncus. 
+					</p>
+				</div>
+
+			</div>
+
+			<div class="col-md-5 microb-content col-md-height">
+				<h1>register:</h1>
+				<form id="register_form" method="post" action="RegisterUser">
+					<ul id="register_errors">
+						<li id="username_error">Username taken or invalid</li>
+						<li id="nickname_error">Nickname taken or invalid</li>
+					</ul>
+					<div id="register_username">
+						<input type="text" name="Username" placeholder="Username"
+							class="form-control" /> <span
+							class="glyphicon glyphicon-ok form-control-feedback"
+							aria-hidden="true"></span> <span
+							class="glyphicon glyphicon-remove form-control-feedback"
+							aria-hidden="true"></span> <br>
+
+					</div>
+					<br>
+
+					<div id="register_password">
+						<input type="password" name="Password" placeholder="Password"
+							class="form-control" /><br>
+					</div>
+					<br>
+
+					<div id="register_nickname">
+						<input type="text" name="Nickname" placeholder="Nick Name"
+							class="form-control" /> <span
+							class="glyphicon glyphicon-ok form-control-feedback"
+							aria-hidden="true"></span> <span
+							class="glyphicon glyphicon-remove form-control-feedback"
+							aria-hidden="true"></span> <br>
+					</div>
+					<br>
+
+					<div id="register_description">
+						<input type="text" name="Description"
+							placeholder="Short Description" class="form-control alot-of-text" /><br>
+					</div>
+					<br>
+
+					<div id="register_profileimage">
+						<input type="text" name="ProfileImage"
+							placeholder="Profile Image URL" class="form-control" /><br>
+					</div>
+					<br>
+					<button type="button" id="do_register" class="btn btn-default">Register</button>
+				</form>
+			</div>
+
+		</div>
+
+		<div class="col-md-1"></div>
+
+	</div>
 
 
 
-  </body>
+</body>
 </html>
