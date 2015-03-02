@@ -1,35 +1,37 @@
 @font-face {
-  font-family: "FiraSans-mid";
-  font-style: normal;
-  font-weight: normal;
-  src: url('../fonts/fira-sans/FiraSans-MediumItalic.otf') format('opentype');
+	font-family: "FiraSans-mid";
+	font-style: normal;
+	font-weight: normal;
+	src: url('../fonts/fira-sans/FiraSans-MediumItalic.otf')
+		format('opentype');
 }
 
 @font-face {
-  font-family: "FiraSans";
-  font-style: normal;
-  font-weight: normal;
-  src: url('../fonts/fira-sans/FiraSans-Italic.otf') format('opentype');
+	font-family: "FiraSans";
+	font-style: normal;
+	font-weight: normal;
+	src: url('../fonts/fira-sans/FiraSans-Italic.otf') format('opentype');
 }
 
 @font-face {
-  font-family: "FiraSans-bold";
-  font-style: normal;
-  font-weight: normal;
-  src: url('../fonts/fira-sans/FiraSans-BoldItalic.otf') format('opentype');
+	font-family: "FiraSans-bold";
+	font-style: normal;
+	font-weight: normal;
+	src: url('../fonts/fira-sans/FiraSans-BoldItalic.otf')
+		format('opentype');
 }
 
 @font-face {
-  font-family: "FiraSans-boldNI";
-  font-style: normal;
-  font-weight: normal;
-  src: url('../fonts/fira-sans/FiraSans-Bold.otf') format('opentype');
+	font-family: "FiraSans-boldNI";
+	font-style: normal;
+	font-weight: normal;
+	src: url('../fonts/fira-sans/FiraSans-Medium.otf') format('opentype');
 }
 
 html, body {
 	height: 100%;
 	background: rgba(242, 242, 242, 1);
-	color: rgb(22,66,41);
+	color: rgb(22, 66, 41);
 	font-family: "FiraSans", Helvetica;
 }
 
@@ -39,13 +41,17 @@ html, body {
 	font-size: 24px;
 }
 
+.a-button {
+	font-family: "FiraSans", Helvetica;
+}
+
 a {
-	color: rgb(29,88,55);
+	color: rgb(29, 88, 55);
 	font-family: "FiraSans-bold", Helvetica;
 }
 
 .navbar-brand {
-	min-height:100px;
+	min-height: 100px;
 }
 
 .row {
@@ -56,19 +62,19 @@ a {
 	margin-left: 8px;
 }
 
-.navbar { 
+.navbar {
 	margin-bottom: 5px;
 }
 
 .navbar-right {
 	/*margin-right: 1%;
 	margin-left: 10%;*/
-	padding-right: 15px;
-	float: inherit;
+	padding-right: 15px; float : inherit;
 	display: table-cell;
+	float: inherit;
 }
 
-#register_form > input[type="text"] {
+#register_form>input[type="text"] {
 	
 }
 
@@ -77,7 +83,7 @@ a {
 	padding-left: 0px;
 }
 
-.navbar > .container-fluid .navbar-brand {
+.navbar>.container-fluid .navbar-brand {
 	margin-left: 12px;
 }
 
@@ -86,7 +92,7 @@ a {
 	color: red;
 }
 
-#register_form > div {
+#register_form>div {
 	position: relative;
 }
 
@@ -97,7 +103,6 @@ a {
 #register_errors {
 	margin-bottom: 30px;
 }
-
 
 #loggedin {
 	display: none;
@@ -112,7 +117,7 @@ form[role="login"] {
 }
 
 #sidebar {
-	float: left;	
+	float: left;
 	padding-top: 20px;
 	height: 100%;
 	min-height: 500px;
@@ -130,12 +135,10 @@ form[role="login"] {
 	float: left;
 }
 
-
 .panel {
 	padding: 0;
 	margin-left: 0px;
 }
-
 
 .profile_pic {
 	max-width: 100px;
@@ -161,12 +164,11 @@ tr.space td, tr.noborder td {
 	font-weight: bold;
 }
 
-
 .microb-content, #navbar {
-	background:	white;
-	-webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1);
--moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1);
-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1);
+	background: white;
+	-webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
 }
 
 .microb-content {
@@ -186,10 +188,9 @@ box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1);
 	margin-bottom: 2%;
 }
 
-li.active[role="presentation"] > a { 
+li.active[role="presentation"]>a {
 	background-color: rgb(217, 217, 217);
 }
-
 
 .center {
 	float: none !important;
@@ -198,15 +199,15 @@ li.active[role="presentation"] > a {
 }
 
 h1 {
-	
 	margin-top: 5px;
 	color: rgb(218, 218, 218);
 	font-size: 50px;
 	font-family: "FiraSans-mid", Helvetica;
-  	-webkit-mask-image: -webkit-radial-gradient(center, ellipse cover, rgb(242,242,242) 0%, rgb(218,218,218) 100%);
-	-webkit-mask-image: radial-gradient(ellipse at center, rgb(242,242,242) 0%, rgb(218,218,218) 100%);
+	-webkit-mask-image: -webkit-radial-gradient(center, ellipse cover, rgb(242, 242, 242)
+		0%, rgb(218, 218, 218) 100%);
+	-webkit-mask-image: radial-gradient(ellipse at center, rgb(242, 242, 242)
+		0%, rgb(218, 218, 218) 100%);
 }
-
 
 form[role="post"] {
 	width: 20%;
@@ -223,7 +224,6 @@ form[role="post"] .form-control {
 
 form[role="post"] input[type="submit"] {
 	float: right;
-	
 	position: relative;
 	top: 5px;
 }
@@ -241,11 +241,9 @@ form[role="post"] input[type="submit"] {
 }
 
 .post-autocomplete li {
-	
 	padding-left: 5px;
 	list-style-type: none;
 }
-
 
 .post-autocomplete li:hover {
 	background: #AAAAAA;
@@ -256,45 +254,47 @@ form[role="post"] input[type="submit"] {
 }
 
 .emboss {
-	-webkit-box-shadow: inset 0px 0px 40px 0px rgba(0,0,0,0.2);
-	-moz-box-shadow: inset 0px 0px 40px 0px rgba(0,0,0,0.2);
-	box-shadow: inset 0px 0px 40px 0px rgba(0,0,0,0.2);
+	-webkit-box-shadow: inset 0px 0px 40px 0px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: inset 0px 0px 40px 0px rgba(0, 0, 0, 0.2);
+	box-shadow: inset 0px 0px 40px 0px rgba(0, 0, 0, 0.2);
 	margin-top: 2%;
 	padding-top: 20px;
 	padding-bottom: 20px;
 	margin-bottom: 2%;
-	background: rgb(242,242,242);
-	
+	background: rgb(242, 242, 242);
 }
 
 /* columns of same height styles */
 .row-same-height {
-    display: table;
-    width: 100%;
-    margin-top: 2%;
-}
-.col-md-height {
-    display: table-cell;
-    float: none !important;
+	display: table;
+	width: 100%;
+	margin-top: 2%;
 }
 
-@media (min-width: 768px) {
-    .col-sm-height {
-        display: table-cell;
-        float: none !important;
-    }
+.col-md-height {
+	display: table-cell;
+	float: none !important;
 }
-@media (min-width: 992px) {
-    .col-md-height {
-        display: table-cell;
-        float: none !important;
-    }
+
+@media ( min-width : 768px) {
+	.col-sm-height {
+		display: table-cell;
+		float: none !important;
+	}
 }
-@media (min-width: 1200px) {
-    .col-lg-height {
-        display: table-cell;
-        float: none !important;
-    }
+
+@media ( min-width : 992px) {
+	.col-md-height {
+		display: table-cell;
+		float: none !important;
+	}
+}
+
+@media ( min-width : 1200px) {
+	.col-lg-height {
+		display: table-cell;
+		float: none !important;
+	}
 }
 
 .horz-logo {
@@ -320,13 +320,42 @@ form[role="post"] input[type="submit"] {
 	width: 100%;
 }
 
-.spanFormat
-{
-  text-align: left;
-  display: table-cell;
-  min-width: 10px;
-  padding-right: 10px;
+.spanFormat {
+	text-align: left;
+	display: table-cell;
+	min-width: 10px;
+	padding-right: 10px;
 }
 
-.selector {
+.panel-body {
+	-webkit-box-shadow: inset 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: inset 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+	box-shadow: inset 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+}
+
+.panel {
+	
+	border: 0px;
+	border-radius: 0px;
+}
+
+.panel-header {
+	font-family: "FiraSans-bold", Helvetica;
+	font-size: 18px;
+}
+
+hr {
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+#discover {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.discover-margin {
+	margin-left: 15px;
+	margin-right: 15px;
+	width: initial;
 }
