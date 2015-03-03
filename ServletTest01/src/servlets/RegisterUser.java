@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
@@ -58,7 +59,6 @@ public class RegisterUser extends HttpServlet {
     		res.next();
     		if(res.getInt(1) != 0)
     		{
-    			System.out.println("User already exist");
     			servletResult result = new servletResult("User already exist");
     			response.getWriter().println(result.getJSONResult());
     			conn.close();
@@ -79,8 +79,9 @@ public class RegisterUser extends HttpServlet {
     		conn.commit();
     		pstmt.close();
 			conn.close();
-
-    		System.out.println("Registered user");
+			HttpSession session = request.getSession();
+	        session.setAttribute("nickname", nickname);
+	        session.setMaxInactiveInterval(AppConstants.SESSION_TTL);	
     		servletResult result = new servletResult("SUCCESS");
 			response.getWriter().println(result.getJSONResult());
     		

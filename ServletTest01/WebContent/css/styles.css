@@ -380,6 +380,23 @@ hr {
 	margin-top: 70px;
 }
 
+.userList > li {
+	list-style-type: none;
+	padding: 20px 0;
+}
+
+.userList {
+	padding-left: 0;
+}
+
+#following {
+	display: none;
+}
+
+.userList .follow {
+	float: right;
+}
+
 @media (max-width: 1100px) and (min-width: 0px) {
 	
 .microb-content {
