@@ -37,29 +37,31 @@
 		</form> -->
 
 		<a class="btn btn-default navbar-btn composeNewMessage"
-			data-toggle="modal" data-target="#newPM" role="button"> <span
+			data-toggle="modal" data-target="#newPost" role="button"> <span
 			class="glyphicon glyphicon-pencil"></span> <span
 			class="a-button hidden-xs hidden-sm">compose new post</span>
 		</a>
 
 		<!-- Modal -->
-		<div class="modal fade" id="newPM" tabindex="-1" role="dialog"
+		<div class="modal fade" id="newPost" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
+			<form id="post-form" method="POST" action="InsertMessage" onsubmit="">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-body">
 						<h4 class="modal-title" id="myModalLabel">Compose new VIRUS:</h4>
 						<br>
 						<div class="form-group">
-							<textarea class="form-control" id="message-text"></textarea>
+							<textarea name="content" class="form-control" id="message-text"></textarea>
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary" id="sendPM">Spread</button>
+						<button type="submit" class="btn btn-primary" id="postit">Spread</button>
 					</div>
 				</div>
 			</div>
+			</form>
 		</div>
 
 		<!-- <form class="navbar-form navbar-left" role="search">

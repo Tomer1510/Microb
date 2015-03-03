@@ -1,5 +1,25 @@
 $(document).ready(function(){
 	
+	isLoggedIn(function(ret){
+		if (ret === true)
+			window.location = "index.html";
+	});
+	
+	$("body").on('click', 'form[role="login"] > button', function(){
+		var username = $(this).parent().find('input[name="Username"]').val();
+		var password = $(this).parent().find('input[name="Password"]').val();
+		$.ajax({
+			url: 'Login', 
+			type: 'POST',
+			dataType: 'json',
+			data: {username: username, password: password}, 
+			success: function(ret){
+				window.location = "index.html";
+			}
+		});
+	});
+	
+	
 	var username_ok = false;
 	var nickname_ok = false;
 	

@@ -56,8 +56,7 @@ public class GetMessagesOfTopic extends HttpServlet {
    		BasicDataSource ds = (BasicDataSource)context.lookup(AppConstants.DB_DATASOURCE);
    		Connection conn = ds.getConnection();
    		
-   		PreparedStatement pstmt = conn.prepareStatement(AppConstants.SEARCH_MESSAGE_BY_TOPIC);
-   		//pstmt.setString(1, value);
+   		PreparedStatement pstmt = conn.prepareStatement(String.format(AppConstants.SEARCH_MESSAGE_BY_TOPIC, topic));
    				   		
    		ResultSet res = pstmt.executeQuery();
    		List<Messages> messages = new ArrayList<Messages>();

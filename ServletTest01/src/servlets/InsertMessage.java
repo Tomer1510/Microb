@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Mentions;
+import model.Topics;
 
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
@@ -51,8 +52,8 @@ public class InsertMessage extends HttpServlet {
 		 String nickname = (String)session.getAttribute("nickname");
 		 String content = request.getParameter("content");
 		 String mentionsStr = request.getParameter("mentions");
-		
-		 if (nickname == null || content == null || mentionsStr == null) {
+		 String topicsStr = request.getParameter("topics");
+		 if (nickname == null || content == null || mentionsStr == null || topicsStr == null) {
 			PrintWriter writer = response.getWriter();
          	writer.println(( new servletResult("false") ).getJSONResult());
          	writer.close();
@@ -63,13 +64,18 @@ public class InsertMessage extends HttpServlet {
     		BasicDataSource ds = (BasicDataSource)context.lookup(AppConstants.DB_DATASOURCE);
     		Connection conn = ds.getConnection();
     		Gson gson = new Gson();
+    		System.out.println(request.getParameter("topics"));
+    		System.out.println(request.getParameter("mentions"));
+    		Gson gson2 = new Gson();
     	 	List<Mentions> mentions = gson.fromJson(request.getParameter("mentions"), new TypeToken<List<Mentions>>(){}.getType());
+    	 	List<Topics> topics = gson2.fromJson(request.getParameter("topics"), new TypeToken<List<Topics>>(){}.getType());
     		PreparedStatement pstmt = conn.prepareStatement(AppConstants.INSERT_MESSAGE_STMT, Statement.RETURN_GENERATED_KEYS);
     		
     		pstmt.setString(1, nickname);
     		pstmt.setString(2, content);
     		pstmt.setString(3, new Gson().toJson(mentions));
-    		
+    		pstmt.setString(4, new Gson().toJson(topics));
+
     		
     		pstmt.executeUpdate();
     		ResultSet lastID = (pstmt.getGeneratedKeys());

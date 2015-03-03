@@ -56,16 +56,34 @@ function isFollowing(nickname, callback) {
 	 });
 }
 
+function parseTime(timeString) {
+	var now = Date.now();
+	var timestamp = new Date(timeString)
+	if (now - timestamp < 1000*60) {
+		return parseInt((now-timestamp)/1000) + " seconds ago";
+	} 
+	else if (now - timestamp < 1000*60*60) {
+		return parseInt((now-timestamp)/(1000*60)) + " minutes ago";
+	}
+	else if (now - timestamp < 1000*60*60*24) {
+		return parseInt((now-timestamp)/(1000*60*60)) + " hours ago";
+	} 
+	else {
+		return timeString; 
+	}
+
+}
 
 function addMessage(message) {
+	message.timestamp = parseTime(message.timestamp);
 	var content = message.content, offset = 0;
 	message.mentions.forEach(function(mention){
-		content = content.substring(0, mention.start+offset) + "<a href=\"profile.html?nickname="+mention.nickname+"\" class=\"mention\">" + mention.nickname + "</a>" + content.substring(mention.end+offset);
-		offset += 53 + mention.nickname.length;
+		content = content.substring(0, mention.start+offset) + "<a href=\"profile.html?nickname="+mention.nickname+"\" class=\"mention\">@" + mention.nickname + "</a>" + content.substring(mention.end+offset);
+		offset += 54 + mention.nickname.length;
 	});
-	var newMsg = '<div class = "col-md-12 panel panel-default">'
-		+'<div class="panel-heading"><div style="display: inline-block;">'+message.authorNickname+'</div><div style="float: right; display: inline-block;">'+message.timestamp+'</div></div>'
-		+'<div class="panel-body">'+content+'</div></div>';
+	var newMsg = '<div class = "col-md-12 panel panel-default message">'
+		+'<div class="panel-body"><div class="panel-header"><div style="display: inline-block;"><a href="profile.html?nickname='+message.authorNickname+'">@'+message.authorNickname+'</a></div><div style="float: right; display: inline-block;">'+message.timestamp+'</div></div><hr>'
+		+''+content+'</div></div>';
 	
 	document.getElementById('messages').innerHTML += newMsg;
 		

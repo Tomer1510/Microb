@@ -3,8 +3,11 @@ $(document).ready(function(){
 	
 	
 	if (urlParams.nickname === undefined && urlParams.username === undefined)
-		urlParams.username =  $.ajax({type: 'get', dataType: 'json', url: "IsLoggedIn", success: function(ret){return ret}, async: false }).responseJSON.value;
-	
+		urlParams.nickname =  $.ajax({type: 'get', dataType: 'json', url: "IsLoggedIn", success: function(ret){return ret}, async: false }).responseJSON.value;
+	isLoggedIn(function(ret, nickname){
+		if (ret === true && nickname === urlParams.nickname)
+			$("#user_details .follow").remove();
+	});
 	var field = (urlParams.nickname === undefined)?"Username":"Nickname", 
 			value = (urlParams.nickname === undefined)?urlParams.username:urlParams.nickname;
 	getUserDetails(field, value, function(ret){		

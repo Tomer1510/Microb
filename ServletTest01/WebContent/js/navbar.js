@@ -1,23 +1,14 @@
 
 var navbar_init = function() {
 	var mentions = [];
-	$("body").on('click', 'form[role="login"] > button', function(){
-		var username = $(this).parent().find('input[name="Username"]').val();
-		var password = $(this).parent().find('input[name="Password"]').val();
-		$.ajax({
-			url: 'Login', 
-			type: 'POST',
-			dataType: 'json',
-			data: {username: username, password: password}, 
-			success: function(ret){
-				window.location = window.location;
-			}
-		});
-	});
+	
 	
 	isLoggedIn(function(ret, nickname){
-		if (ret === false) 
-			$('form[role="login"]').show();
+		if (ret === false) {
+			$('form[role="login"]').hide();
+			if (window.location.pathname.indexOf("register.html") === -1)
+				window.location = "register.html";
+		}
 		else if (ret === true){
 			$("#loggedin").show();
 			$('form[role="login"]').hide();
@@ -57,17 +48,32 @@ var navbar_init = function() {
 		
 	});
 	
+	function addHiddenElm(name, value) {
+		var elm = document.createElement("input");
+		elm.type = "hidden";
+		elm.name = name;
+		elm.value = JSON.stringify(value);
+		return elm;
+	}
+	
 	$("#post-form").submit(function(){
-		var text = $("#navbar input[name=content]").val();
+		var text = $(this).find("textarea[name=content]").val();
 		mentions.forEach(function(user, i){
 			if (text.substring(user.start, user.end) !== user.nickname)
 				mentions.splice(i, 1);
 		});
-		var mentionsElm = document.createElement("input");
+		
+			/*document.createElement("input");
 		mentionsElm.type = "hidden";
 		mentionsElm.name = "mentions";
-		mentionsElm.value = JSON.stringify(mentions);
-		$(this).append(mentionsElm);
+		mentionsElm.value = JSON.stringify(mentions);*/
+		$(this).append(addHiddenElm("mentions", mentions));
+		var topics = [];
+		text.split(" ").forEach(function(word){
+			if(word[0] === '#' && word.length > 1)
+				topics.push({'topic': word.substr(1)});
+		});
+		$(this).append(addHiddenElm("topics", topics));
 	});
 	
 	

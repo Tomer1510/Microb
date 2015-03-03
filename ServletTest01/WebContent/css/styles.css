@@ -35,6 +35,10 @@ html, body {
 	font-family: "FiraSans", Helvetica;
 }
 
+a:hover {
+	text-decoration: none;
+}
+
 .sidebar-text {
 	margin-left: 5%;
 	font-family: "FiraSans-boldNI", Helvetica;
@@ -138,6 +142,7 @@ form[role="login"] {
 .panel {
 	padding: 0;
 	margin-left: 0px;
+	box-shadow: none;
 }
 
 .profile_pic {
@@ -253,6 +258,15 @@ form[role="post"] input[type="submit"] {
 	color: #0007ed;
 }
 
+
+#messages .message .panel-header > div:first-child {
+	float: center; display: inline-block;
+}
+
+#messages .message .panel-header > div:last-child {
+	float: right; display: inline-block;
+}
+
 .emboss {
 	-webkit-box-shadow: inset 0px 0px 40px 0px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow: inset 0px 0px 40px 0px rgba(0, 0, 0, 0.2);
@@ -328,6 +342,7 @@ form[role="post"] input[type="submit"] {
 }
 
 .panel-body {
+	border-radius: 15px;
 	-webkit-box-shadow: inset 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
 	-moz-box-shadow: inset 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
 	box-shadow: inset 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
@@ -350,12 +365,59 @@ hr {
 }
 
 #discover {
-	padding-left: 0px;
-	padding-right: 0px;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 .discover-margin {
 	margin-left: 15px;
 	margin-right: 15px;
 	width: initial;
+}
+
+.logo-mobile {
+	display: none;
+	margin-top: 70px;
+}
+
+@media (max-width: 1100px) and (min-width: 0px) {
+	
+.microb-content {
+	margin-top: 0%;
+}
+	
+.microb-content > div:first-child {
+	margin-top: 60px;
+}
+#sidebar { 
+	display: none;
+}
+
+#navbar {
+	position: fixed;
+	width: 100%;
+	z-index: 999;
+}
+
+.navbar-right {
+float: right!important;
+margin-right: -5px;
+}
+
+.navbar-text {
+float: left;
+}
+
+.logo-mobile {
+	text-align: center;
+	display: block;
+	
+}
+
+.logo-mobile img {
+	width: auto;
+	max-height:130px;
+	max-width: 100%;
+}
+
 }
