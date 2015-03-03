@@ -2,8 +2,6 @@
  * 
  */
 package model;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 /**
  * @author sean
@@ -12,9 +10,8 @@ import java.net.URL;
 public class Users {
 
 	private String Username, NickName, Description;
-	private URL ProfileImage;
+	private String ProfileImage;
 	private int ID;
-	static public int IDcounter = 0;
 
 	public Users(String username, String nickName, String description, String imageURL) {
 		// TODO Auto-generated constructor stub
@@ -22,15 +19,11 @@ public class Users {
 		//this.Password = pass;
 		this.NickName = nickName;
 		this.Description = description;
-		try {
-			this.ProfileImage = new URL(imageURL);
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(!imageURL.equals("")) {
+			this.ProfileImage = imageURL;
+		} else {
+			this.ProfileImage = "img/defaultImage.png";
 		}
-		this.ID = Users.IDcounter;
-		
-		Users.IDcounter++;
 	}
 
 	public String getUsername() {
@@ -41,16 +34,6 @@ public class Users {
 		return ID;
 	}
 
-	public static int getIDcounter() {
-		return IDcounter;
-	}
-	
-	/*public boolean isPassCorrect(String pass)
-	{
-		if(this.Password.compareTo(pass) == 0) return true;
-		else return false;
-	}*/
-
 	public String getNickName() {
 		return NickName;
 	}
@@ -59,7 +42,7 @@ public class Users {
 		return Description;
 	}
 
-	public URL getProfileImage() {
+	public String getProfileImage() {
 		return ProfileImage;
 	}
 

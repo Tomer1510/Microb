@@ -74,18 +74,31 @@ function parseTime(timeString) {
 
 }
 
-function addMessage(message) {
+function parseTopics(message) {
+	var subtext = message, index, offset=0;
+	while ((index = subtext.indexOf("#")) !== -1) {
+		offset+=index;
+		subtext = subtext.substr(index);
+		var topic = subtext.split(" ")[0];
+		message = message.substring(0, offset)  + "<span class=\"topic\" data-topic=\""+topic.substr(1)+"\">" + topic + "</span>" + message.substring(offset+topic.length);
+		subtext = subtext.substr(topic.length);
+		offset += topic.length + 41 + topic.length - 1;
+	}
+	return message;
+}
+
+
+function addMessage(message, div) {
+	if (div === undefined)
+		div = document.getElementById('messages');
 	message.timestamp = parseTime(message.timestamp);
-	var content = message.content, offset = 0;
-	message.mentions.forEach(function(mention){
-		content = content.substring(0, mention.start+offset) + "<a href=\"profile.html?nickname="+mention.nickname+"\" class=\"mention\">@" + mention.nickname + "</a>" + content.substring(mention.end+offset);
-		offset += 54 + mention.nickname.length;
-	});
+	var content = message.content;
+	content = parseTopics(content);
 	var newMsg = '<div class = "col-md-12 panel panel-default message">'
 		+'<div class="panel-body"><div class="panel-header"><div style="display: inline-block;"><a href="profile.html?nickname='+message.authorNickname+'">@'+message.authorNickname+'</a></div><div style="float: right; display: inline-block;">'+message.timestamp+'</div></div><hr>'
-		+''+content+'</div></div>';
+		+'<div class="message-content">'+content+'</div><br><br><button class="btn btn-default republish" data-toggle="modal" data-target="#newPost">Republish</button></div></div>';
 	
-	document.getElementById('messages').innerHTML += newMsg;
+	div.innerHTML += newMsg;
 		
 }
 

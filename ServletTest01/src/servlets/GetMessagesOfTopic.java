@@ -62,7 +62,7 @@ public class GetMessagesOfTopic extends HttpServlet {
    		List<Messages> messages = new ArrayList<Messages>();
    		int i = 1;
    		while(res.next() && i <= 10) {
-   			Messages resultMessage = new Messages(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getTimestamp(6), res.getInt(7));
+   			Messages resultMessage = new Messages(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getTimestamp(5), res.getInt(6));
    			messages.add(resultMessage);
    			i++;
    		}

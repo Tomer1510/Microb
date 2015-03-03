@@ -18,7 +18,7 @@ public class Logout extends HttpServlet {
  
 	    HttpSession session = request.getSession();
 	    session.invalidate();
-	    response.sendRedirect("index.html?msg=loggedout");
+	    response.sendRedirect("register.html?msg=loggedout");
 	    
     	
     }

@@ -2,25 +2,25 @@ package model;
 
 public class Mentions {
 	private String nickname;
-	private int start, end;
+	//private int start, end;
 	
-	public Mentions(String nickname, int start, int end) {
+	public Mentions(String nickname) {
 		this.nickname = nickname;
-		this.start = start;
-		this.end = end;
+		//this.start = start;
+		//this.end = end;
 	}
 	
 	public String getNickname() {
 		return this.nickname;
 	}
 	
-	public int getStart() {
+	/*public int getStart() {
 		return this.start;
 	}
 	
 	public int getEnd() {
 		return this.end;
-	}
+	}*/
 	
 	
 	/*public String toString() {

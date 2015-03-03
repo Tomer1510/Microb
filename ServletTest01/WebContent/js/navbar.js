@@ -57,7 +57,11 @@ var navbar_init = function() {
 	}
 	
 	$("#post-form").submit(function(){
+		
+		
 		var text = $(this).find("textarea[name=content]").val();
+		if (text.length > 140)
+			return false;
 		mentions.forEach(function(user, i){
 			if (text.substring(user.start, user.end) !== user.nickname)
 				mentions.splice(i, 1);
@@ -66,8 +70,8 @@ var navbar_init = function() {
 			/*document.createElement("input");
 		mentionsElm.type = "hidden";
 		mentionsElm.name = "mentions";
-		mentionsElm.value = JSON.stringify(mentions);*/
-		$(this).append(addHiddenElm("mentions", mentions));
+		mentionsElm.value = JSON.stringify(mentions);
+		$(this).append(addHiddenElm("mentions", mentions));*/
 		var topics = [];
 		text.split(" ").forEach(function(word){
 			if(word[0] === '#' && word.length > 1)
@@ -76,6 +80,21 @@ var navbar_init = function() {
 		$(this).append(addHiddenElm("topics", topics));
 	});
 	
+	$("#post-form textarea[name=content]").keyup(function(){
+		var len = $(this).val().length;
+		$("#post-form .letter-counter").text(len)
+		if (len > 140) {
+			$("#post-form .letter-counter").addClass('red');
+		}
+		else {
+			$("#post-form .letter-counter").removeClass('red');
+		}
+	});
 	
+	$("body").on('click', '.republish', function(){
+		var originalMessage = $(this).parent().find('.message-content').text();
+		$("#post-form textarea[name=content]").val("RE: "+originalMessage+"\n").keyup();
+	
+	});
 	
 };
