@@ -1,0 +1,61 @@
+/**
+ * 
+ */
+package model;
+
+/**
+ * @author      Sean Man 206184798
+ * @author		Tomer Eiges 315818948
+ * 
+ * represent user
+ */
+public class Users {
+
+	private String Username, NickName, Description;
+<<<<<<< HEAD:ServletTest01/src/model/Users.java
+	private String ProfileImage;
+	private int ID;
+=======
+	private URL ProfileImage; // URL for profile image
+	private int ID; // ID number in the DB
+>>>>>>> commented:ServletTest01_commented/src/model/Users.java
+
+	public Users(String username, String nickName, String description, String imageURL) {
+		this.Username = username;
+		this.NickName = nickName;
+		this.Description = description;
+<<<<<<< HEAD:ServletTest01/src/model/Users.java
+		if(!imageURL.equals("")) {
+			this.ProfileImage = imageURL;
+		} else {
+			this.ProfileImage = "img/defaultImage.png";
+=======
+		try {
+			this.ProfileImage = new URL(imageURL);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+>>>>>>> commented:ServletTest01_commented/src/model/Users.java
+		}
+	}
+
+	public String getUsername() {
+		return Username;
+	}
+
+	public int getID() {
+		return ID;
+	}
+
+	public String getNickName() {
+		return NickName;
+	}
+
+	public String getDescription() {
+		return Description;
+	}
+
+	public String getProfileImage() {
+		return ProfileImage;
+	}
+
+}

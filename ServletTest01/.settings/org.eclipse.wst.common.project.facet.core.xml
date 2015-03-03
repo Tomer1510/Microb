@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faceted-project>
+  <runtime name="Apache Tomcat v7.0"/>
+  <fixed facet="jst.web"/>
+  <fixed facet="java"/>
+  <fixed facet="wst.jsdt.web"/>
+<<<<<<< Updated upstream:ServletTest01_commented/.settings/org.eclipse.wst.common.project.facet.core.xml
+  <installed facet="java" version="1.8"/>
+  <installed facet="wst.jsdt.web" version="1.0"/>
+=======
+  <installed facet="wst.jsdt.web" version="1.0"/>
+  <installed facet="java" version="1.7"/>
+>>>>>>> Stashed changes:ServletTest01/.settings/org.eclipse.wst.common.project.facet.core.xml
+  <installed facet="jst.web" version="3.0"/>
+</faceted-project>

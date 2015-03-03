@@ -1,5 +1,12 @@
 package model;
 
+/**
+ * @author      Sean Man 206184798
+ * @author		Tomer Eiges 315818948
+ * 
+ * represent a topic in user's message
+ */
+
 public class Topics {
 	private String topic;
 	
@@ -10,16 +17,5 @@ public class Topics {
 	public String getTopic() {
 		return this.topic;
 	}
-	
-	
-	/*public String toString() {
-		String ret = "[";
-		for (int i = 0; i < this.mentions.size(); i++) {
-			ret += '"'+this.mentions.get(i)+"\",";
-	     }
-		ret = (ret.length()>1?ret.substring(0, ret.length()-1):ret)+"]";
-		System.out.println(ret);
-		return ret;
-	}*/
 
 }
