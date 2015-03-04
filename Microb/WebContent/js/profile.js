@@ -1,5 +1,11 @@
 $(document).ready(function(){
 	
+	$("#messages").on('click', '.topic', function(){
+		var topic = $(this).data('topic');
+		window.location = 'index.html?topic='+topic.trim();
+	});
+	
+	
 	
 	if (urlParams.nickname === undefined && urlParams.username === undefined)
 		urlParams.nickname =  $.ajax({type: 'get', dataType: 'json', url: "IsLoggedIn", success: function(ret){return ret}, async: false }).responseJSON.value;
@@ -82,7 +88,7 @@ $(document).ready(function(){
 			var table = $("#user_details tbody");
 			var fields = ['Username', 'NickName', 'Description'];
 			if (ret.ProfileImage !== undefined) {
-				table.append('<tr class="noborder"><td colspan="3"><img class="profile_pic" src="'+ret.ProfileImage+'"</td></tr>');
+				table.append('<tr class="noborder"><td colspan="3"><img alt="profile image" class="profile_pic" src="'+ret.ProfileImage+'"</td></tr>');
 			}
 			table.append('<tr class="space"><td colspan="3"></td></tr>');
 			$.each(fields, function(i, field) {

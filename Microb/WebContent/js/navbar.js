@@ -46,7 +46,7 @@ var navbar_init = function() {
 		var topics = [];
 		text.split(" ").forEach(function(word){
 			if(word[0] === '#' && word.length > 1)
-				topics.push({'topic': word.substr(1)});
+				topics.push({'topic': word.substr(1).trim()});
 		});
 		
 		//Add hidden elements to the form for the topics we parsed and the republish var

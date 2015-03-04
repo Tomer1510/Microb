@@ -110,6 +110,7 @@ function parseTopics(message) {
 	while ((index = subtext.indexOf("#")) !== -1) {
 		offset+=index;
 		subtext = subtext.substr(index);
+		subtext.replace("\n", "\n ");
 		var topic = subtext.split(" ")[0];
 		message = message.substring(0, offset)  + "<span class=\"topic\" data-topic=\""+topic.substr(1).trim()+"\">" + topic + "</span>" + message.substring(offset+topic.length);
 		subtext = subtext.substr(topic.length);

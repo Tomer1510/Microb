@@ -1,7 +1,8 @@
 $(document).ready(function(){
 	var discover = "All";
 	var topic = "";
-	
+	if (urlParams.topic !== undefined)
+		topic = urlParams.topic;
 	/**
 	 * Update the "discover" part of the feed, this gets called after page load and afterwards with setInterval()
 	 */
