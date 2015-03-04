@@ -5,10 +5,11 @@ $(document).ready(function(){
 			url: "GetFeed", 
 			dataType: 'json',
 			type: 'POST',
+			data: {returns: 'Following'},
 			success: function(ret){	
-				document.getElementById('messages').innerHTML = "";
+				document.getElementById('discover_messages').innerHTML = "";
 				$.each(ret, function(i, message) {
-					addMessage(message); 
+					addMessage(message, document.getElementById('discover_messages')); 
 				}); 
 			}
 		});

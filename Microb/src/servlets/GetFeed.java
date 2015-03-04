@@ -69,9 +69,9 @@ public class GetFeed extends HttpServlet {
     		Connection conn = ds.getConnection();
     		
     		PreparedStatement pstmt;
-    		if(returns == "Following") // checks whether to return only messages of followings
+    		if(returns.equals("Following")) // checks whether to return only messages of followings
     		{	pstmt = conn.prepareStatement(AppConstants.SELECT_MESSAGES_BY_FOLLOWING); }
-    		else if(returns == "All") // or from all users
+    		else if(returns.equals("All")) // or from all users
     		{	pstmt = conn.prepareStatement(AppConstants.SELECT_ALL_MESSAGES_OF_NICKNAME_STMT); }
     		else { // sanity check
     			PrintWriter writer = response.getWriter();

@@ -91,6 +91,7 @@ function parseTopics(message) {
 function addMessage(message, div) {
 	if (div === undefined)
 		div = document.getElementById('messages');
+	console.log(message);
 	message.timestamp = parseTime(message.timestamp);
 	var content = message.content;
 	content = parseTopics(content);

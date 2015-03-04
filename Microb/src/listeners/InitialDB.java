@@ -148,7 +148,7 @@ public class InitialDB implements ServletContextListener {
     		Context context = new InitialContext();
     		BasicDataSource ds = (BasicDataSource)context.lookup(AppConstants.DB_DATASOURCE);
     		Connection conn = ds.getConnection();
-    		dropTable(conn, cntx, "Messages");
+    		//dropTable(conn, cntx, "Messages");
     		//dropTable(conn, cntx, "Users");
     		//dropTable(conn, cntx, "Following");
     		
