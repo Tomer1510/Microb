@@ -25,7 +25,6 @@ public interface AppConstants {
 	public final String CREATE_MESSAGES_TABLE = "CREATE TABLE Messages(ID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
 			+ "AuthorNickname varchar(10),"
 			+ "Content varchar(200),"
-			//+ "Mentions varchar(200),"
 			+ "Topics varchar(200),"
 			+ "Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,"
 			+ "RepublishCounter INTEGER DEFAULT 0,"
