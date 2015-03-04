@@ -41,7 +41,7 @@ public class GetUserDetails extends HttpServlet {
     }
 
     /**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 * 
 	 * Return the JSON representation of required user.
 	 *
@@ -49,7 +49,7 @@ public class GetUserDetails extends HttpServlet {
 	 * 										and the parameter 'value' that represent the 'field' value.
 	 * @param  HttpServletResponse response - contains JSON representation of the user.
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
 		try{
@@ -57,8 +57,11 @@ public class GetUserDetails extends HttpServlet {
     		BasicDataSource ds = (BasicDataSource)context.lookup(AppConstants.DB_DATASOURCE);
     		Connection conn = ds.getConnection();
     		
-    		String field = request.getParameter("field"); // get 'field' parameter
-    		if ( (!field.equals("Nickname") && !field.equals("Username")) || request.getParameter("value")==null ) // sanity check
+    		String[] param = request.getPathInfo().replaceFirst("/", "").replaceAll("/", " ").split("\\s+"); // get parameters
+    		String field = param[0]; // get 'field' parameter
+    		String value = param[1]; // get 'value' parameter
+    		
+    		if ( (!field.equals("Nickname") && !field.equals("Username")) || value==null ) // sanity check
     		{
     			servletResult result = new servletResult("Invalid request");
     			response.getWriter().println(result.getJSONResult());
@@ -66,7 +69,6 @@ public class GetUserDetails extends HttpServlet {
     			return;
     		}
     		
-    		String value = request.getParameter("value"); // get 'value' parameter
     		PreparedStatement pstmt;
     		if (field.equals("Username")) { // checks whether to return user by username
     			pstmt = conn.prepareStatement(AppConstants.SELECT_USER_BY_USERNAME_STMT);

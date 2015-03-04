@@ -43,15 +43,15 @@ public class GetMessagesOfTopic extends HttpServlet {
     }
 
     /**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 * 
 	 * Return the JSON representation of required messages by topic.
 	 *
 	 * @param  HttpServletRequest request - contain the parameter 'topic' that represent which topic to filter by.
 	 * @param  HttpServletResponse response - contains JSON representation of the messages.
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String topic = request.getParameter("topic"); // get 'topic' parameter
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String topic = request.getPathInfo().replaceFirst("/", ""); // get 'topic' parameter
 		 if (topic == null) { // sanity check
 			PrintWriter writer = response.getWriter();
         	writer.println(( new servletResult("false") ).getJSONResult());

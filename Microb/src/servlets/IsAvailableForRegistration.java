@@ -37,7 +37,7 @@ public class IsAvailableForRegistration extends HttpServlet {
     }
 
     /**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 * 
 	 * Return whether the username/nickname is available for registration.
 	 *
@@ -45,15 +45,18 @@ public class IsAvailableForRegistration extends HttpServlet {
 	 * 										and the parameter 'value' that represent the 'field' value.
 	 * @param  HttpServletResponse response - contains JSON representation of the availability.
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try{
 			Context context = new InitialContext();
     		BasicDataSource ds = (BasicDataSource)context.lookup(AppConstants.DB_DATASOURCE);
     		Connection conn = ds.getConnection();
     		
-    		String field = request.getParameter("field"); // get 'field' parameter
-    		if ( (!field.equals("Nickname") && !field.equals("Username")) || request.getParameter("value")==null ) // sanity check
+    		String[] param = request.getPathInfo().replaceFirst("/", "").replaceAll("/", " ").split("\\s+"); // get parameters
+    		String field = param[0]; // get 'field' parameter
+    		String value = param[1]; // get 'value' parameter
+    		
+    		if ( (!field.equals("Nickname") && !field.equals("Username")) || value==null ) // sanity check
     		{
     			servletResult result = new servletResult("Invalid request");
     			response.getWriter().println(result.getJSONResult());
@@ -61,7 +64,6 @@ public class IsAvailableForRegistration extends HttpServlet {
     			return;
     		}
     		
-    		String value = request.getParameter("value"); // get 'value' parameter
     		PreparedStatement pstmt;
     		if (field.equals("Username")) { // checks whether to check availability by username
     			pstmt = conn.prepareStatement(AppConstants.COUNT_USER_BY_USERNAME_STMT);

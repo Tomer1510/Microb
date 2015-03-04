@@ -14,15 +14,12 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
-
-
 
 /**
  * @author      Sean Man 206184798
@@ -43,18 +40,18 @@ public class ToggleFollow extends HttpServlet {
     }
 
     /**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 * 
 	 * add or remove following of user after other user.
 	 *
 	 * @param  HttpServletRequest request - contain the parameter 'nickname' for filtering the results
 	 * @param  HttpServletResponse response - contains JSON representation of the answer.
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		 HttpSession session = request.getSession();
 		 String sourceNickname = (String)session.getAttribute("nickname"); // get nickname of the current user parameter
-		 String targetNickname = request.getParameter("nickname"); // get 'nickname' parameter
+		 String targetNickname = request.getPathInfo().replaceFirst("/", ""); // get 'nickname' parameter
 		 if (sourceNickname == null || targetNickname == null ) { // sanity check
 			PrintWriter writer = response.getWriter();
          	writer.println(( new servletResult("false") ).getJSONResult());

@@ -20,7 +20,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
@@ -42,16 +41,16 @@ public class GetTop10Following extends HttpServlet {
     }
 
     /**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 * 
 	 * Return the JSON representation top-10 followings of required user.
 	 .
 	 * @param  HttpServletRequest request - contain the parameter 'nickname' that represent the user to filter by.
 	 * @param  HttpServletResponse response - contains JSON representation of the top-10 users.
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String nickname = request.getParameter("nickname"); // get 'nickname' parameter
+		String nickname = request.getPathInfo().replaceFirst("/", ""); // get 'nickname' parameter
 		if (nickname == null) { // sanity check
 			PrintWriter writer = response.getWriter();
          	writer.println(( new servletResult("false") ).getJSONResult());

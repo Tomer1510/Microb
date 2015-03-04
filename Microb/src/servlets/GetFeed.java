@@ -44,7 +44,7 @@ public class GetFeed extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 * 
 	 * Return the JSON representation of DISCOVERY messages as defined in the requirements doc.
 	 *
@@ -52,14 +52,15 @@ public class GetFeed extends HttpServlet {
 	 * 										from all users or only from users that the user is following after.
 	 * @param  HttpServletResponse response - contains JSON representation of DISCOVERY messages.
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
 		String nickname = (String)session.getAttribute("nickname"); // get current user nickname
-		String returns = request.getParameter("returns"); // get 'returns' parameter
+		String returns = request.getPathInfo(); // get 'returns' parameter
+		System.out.println(returns + "   " + nickname);
 		if (nickname == null || returns == null) { // sanity check
 			PrintWriter writer = response.getWriter();
-         	writer.println(( new servletResult("false") ).getJSONResult());
+         	writer.println(( new servletResult("false sanity") ).getJSONResult());
          	writer.close();
          	return;
 		 }
@@ -69,13 +70,13 @@ public class GetFeed extends HttpServlet {
     		Connection conn = ds.getConnection();
     		
     		PreparedStatement pstmt;
-    		if(returns.equals("Following")) // checks whether to return only messages of followings
+    		if(returns.equals("/Following")) // checks whether to return only messages of followings
     		{	pstmt = conn.prepareStatement(AppConstants.SELECT_MESSAGES_BY_FOLLOWING); }
-    		else if(returns.equals("All")) // or from all users
+    		else if(returns.equals("/All")) // or from all users
     		{	pstmt = conn.prepareStatement(AppConstants.SELECT_ALL_MESSAGES_OF_NICKNAME_STMT); }
     		else { // sanity check
     			PrintWriter writer = response.getWriter();
-             	writer.println(( new servletResult("false") ).getJSONResult());
+             	writer.println(( new servletResult("false arg") ).getJSONResult());
              	writer.close();
              	return;
     		}
