@@ -34,6 +34,7 @@ $(document).ready(function(){
 				url: 'GetTop10Following/'+ret.NickName, 
 				dataType: 'json', 
 				success: function(users){
+ 					$('.followButtons button[data-type="following"]').text("Following ("+users.length+")");
 					users.forEach(function(user){
 						isFollowing(user.result, function(following){
 								var text = following?"Unfollow":"Follow him!";
@@ -51,6 +52,7 @@ $(document).ready(function(){
 				dataType: 'json', 
 				data: {nickname: ret.NickName}, 
 				success: function(users){
+ 					$('.followButtons button[data-type="followers"]').text("Followers ("+users.length+")");
 					users.forEach(function(user){
 						isFollowing(user.result, function(following){
 								var text = following?"Unfollow":"Follow him!";

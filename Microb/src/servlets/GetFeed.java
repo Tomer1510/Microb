@@ -59,7 +59,6 @@ public class GetFeed extends HttpServlet implements SingleThreadModel {
 		HttpSession session = request.getSession();
 		String nickname = (String)session.getAttribute("nickname"); // get current user nickname
 		String returns = request.getPathInfo(); // get 'returns' parameter
-		System.out.println(returns + "   " + nickname);
 		if (nickname == null || returns == null) { // sanity check
 			PrintWriter writer = response.getWriter();
          	writer.println(( new servletResult("false sanity") ).getJSONResult());

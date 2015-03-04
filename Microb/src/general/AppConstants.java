@@ -39,7 +39,6 @@ public interface AppConstants {
 			+ "PRIMARY KEY (ID))";
 	
 	// SQL SELECT
-	public final String SELECT_ALL_CUSTOMERS_STMT = "SELECT * FROM CUSTOMER";
 	public final String SELECT_USER_BY_USERNAME_STMT = "SELECT * FROM Users "
 			+ "WHERE Username=?";
 	public final String SELECT_USER_BY_NICKNAME_STMT = "SELECT * FROM Users "
