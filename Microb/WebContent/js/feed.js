@@ -1,11 +1,16 @@
 $(document).ready(function(){
 	
 	function updateFeed() {
-		$.getJSON("GetFeed", function(ret){
-			document.getElementById('messages').innerHTML = "";
-			$.each(ret, function(i, message) {
-				addMessage(message); 
-			}); 
+		$.ajax({
+			url: "GetFeed", 
+			dataType: 'json',
+			type: 'POST',
+			success: function(ret){	
+				document.getElementById('messages').innerHTML = "";
+				$.each(ret, function(i, message) {
+					addMessage(message); 
+				}); 
+			}
 		});
 	}
 	
