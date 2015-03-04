@@ -7,6 +7,14 @@
 }
 
 @font-face {
+	font-family: "FiraSans-light";
+	font-style: normal;
+	font-weight: normal;
+	src: url('../fonts/fira-sans/FiraSans-LightItalic.otf')
+		format('opentype');
+}
+
+@font-face {
 	font-family: "FiraSans";
 	font-style: normal;
 	font-weight: normal;
@@ -255,7 +263,7 @@ form[role="post"] input[type="submit"] {
 }
 
 .mention {
-	color: #0007ed;
+	color: #2a804f;
 }
 
 
@@ -321,7 +329,7 @@ form[role="post"] input[type="submit"] {
 .microb-discription {
 	margin-left: 10%;
 	margin-right: 10%;
-	margin-top: 15%;
+	margin-top: 8%;
 	font-size: 18pt;
 }
 
@@ -363,6 +371,12 @@ form[role="post"] input[type="submit"] {
 #discover {
 	padding-left: 0px;
 	padding-right: 0px;
+}
+
+.discover-margin {
+	margin-left: 15px;
+	margin-right: 15px;
+	width: initial;
 }
 
 #topics {
@@ -408,6 +422,7 @@ hr {
 .topic {
 	font-weight: bold;
 	cursor: pointer;
+	color: #2a804f;
 }
 
 @media (max-width: 1100px) and (min-width: 0px) {
@@ -450,4 +465,22 @@ float: left;
 	max-width: 100%;
 }
 
+}
+
+#login {
+	margin-left: 15%;
+	margin-right: 15%;
+}
+
+#bold-text {
+	font-family: "FiraSans-mid", Helvetica;
+}
+
+.republish, .reply {
+	background-color: rgba(255,255,255,0);
+	border-width: 0px;
+}
+
+.msg-button {
+	font-family: "FiraSans-light", Helvetica;
 }

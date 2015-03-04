@@ -163,7 +163,7 @@ function addMessage(message, div) {
 	content = parseMentions(content);
 	var newMsg = '<div class = "col-md-12 panel panel-default message" data-id="'+message.messageID+'">'
 		+'<div class="panel-body"><div class="panel-header"><div style="display: inline-block;"><a href="profile.html?nickname='+message.authorNickname+'" class=\"author\">@'+message.authorNickname+'</a></div><div style="float: right; display: inline-block;">'+message.timestamp+'</div></div><hr>'
-		+'<div class="message-content">'+content+'</div><br><br><button class="btn btn-default republish" data-toggle="modal" data-target="#newPost">Republish</button>&nbsp<button class="btn btn-default reply" data-toggle="modal" data-target="#newPost">Reply</button></div></div>';
+		+'<div class="message-content">'+content+'</div><br><button class="btn btn-default republish" data-toggle="modal" data-target="#newPost"><span class="glyphicon glyphicon-retweet"></span> <span class="msg-button hidden-xs hidden-sm"> Republish</span></button>&nbsp<button class="btn btn-default reply" data-toggle="modal" data-target="#newPost"><span class="glyphicon glyphicon-share-alt"></span> <span class="msg-button hidden-xs hidden-sm"> Reply</span></button></div></div>';
 	
 	div.innerHTML += newMsg;
 		

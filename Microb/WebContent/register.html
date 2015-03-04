@@ -17,8 +17,8 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="css/styles.css">
 <script src="js/register.js"></script>
-<script src="js/navbar.js"></script> 
-<script src="js/sidebar.js"></script> 
+<script src="js/navbar.js"></script>
+<script src="js/sidebar.js"></script>
 
 </head>
 
@@ -34,10 +34,10 @@
 		<div class="col-md-10 row row-same-height">
 			<div class="col-md-7 emboss col-md-height">
 				<div>
-					<img alt="logo" src="img/horz-logo.png" class = "horz-logo">
+					<img alt="logo" src="img/horz-logo.png" class="horz-logo">
 				</div>
 				<div>
-					<form class="navbar-form navbar-right" role="login">
+					<form id="login" class="navbar-form" role="login">
 						<div class="form-group">
 							<input name="Username" type="text" class="form-control"
 								placeholder="Username"> <input name="Password"
@@ -47,9 +47,13 @@
 					</form>
 				</div>
 				<div>
-					<p class = "microb-discription">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget purus a erat vehicula malesuada quis eget mauris. Aliquam aliquet nisl nec ipsum rutrum, at dignissim lorem ullamcorper. Vivamus gravida rutrum ipsum, ac venenatis justo eleifend rhoncus. 
-					</p>
+					<p class="microb-discription">
+						The power of ideas are immeasurable <br>
+						They are the hidden treasures which lies <br>
+						Deep within each and everyone of us <br>
+						When we take the time to mind them we will find <br>
+						That they are more precious than diamonds <br><br>
+						<span id="bold-text">Let them spread, spread like a virus!</span></p>
 				</div>
 
 			</div>
@@ -91,8 +95,7 @@
 					<div id="register_description">
 						<input type="text" name="Description"
 							placeholder="Short Description" class="form-control alot-of-text" />
-						<span class="letter-counter">0</span>/50
-						<br>
+						<span class="letter-counter">0</span>/50 <br>
 					</div>
 					<br>
 
