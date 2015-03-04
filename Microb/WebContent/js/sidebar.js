@@ -1,3 +1,6 @@
+/**
+ * Initializes the sidebar - marks the correct sidebar link as active
+ */
 function sidebar_init() {
 	var current_page = get_current_page();
 	if (current_page === "index.html" || current_page === "")

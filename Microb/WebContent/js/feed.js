@@ -1,6 +1,11 @@
 $(document).ready(function(){
 	var discover = "All";
-	function updateFeed() {
+	var topic = "";
+	
+	/**
+	 * Update the "discover" part of the feed, this gets called after page load and afterwards with setInterval()
+	 */
+	function updateDiscover() {
 		$.ajax({
 			url: "GetFeed", 
 			dataType: 'json',
@@ -15,35 +20,58 @@ $(document).ready(function(){
 		});
 	}
 	
+	
+	/**
+	 * Update the "topic" part of the feed, this gets called after page load and afterwards with setInterval()
+	 */
+	function updateTopic() {
+		if (topic !== "") {		
+			$.ajax({
+				url: "GetMessagesOfTopic",
+				dataType: 'json',
+				type: 'POST',
+				data: {topic: topic},
+				success: function(messages){
+					document.getElementById('topic_messages').innerHTML = "";
+					$.each(messages, function(i, message) {
+						addMessage(message, document.getElementById('topic_messages')); 
+					}); 
+				}
+			});
+		}
+	}
+	
+	
+	/**
+	 * After validating the user's session it initializes the feed views, and initializes the setInterval() calls
+	 * that update the views every 15 seconds
+	 */
 	isLoggedIn(function(isLogged){
 		if (isLogged === true) {
 			setInterval(function(){
-				updateFeed();
+				updateDiscover();
+				updateTopic();
 			}, 15000);
-			updateFeed();
-			
+			updateDiscover();
+			updateTopic();
 		
 			
 		}
 	});
 	
+	
+	/**
+	 * Event listener for topic links in posts - when the user clicks on a topic it updates the topic view
+	 */
 	$("body").on("click", ".topic", function(){
-		var topic = $(this).data('topic');
-		document.getElementById('topic_messages').innerHTML = "";
-		$.ajax({
-			url: "GetMessagesOfTopic",
-			dataType: 'json',
-			type: 'POST',
-			data: {topic: topic},
-			success: function(messages){
-				$.each(messages, function(i, message) {
-					addMessage(message, document.getElementById('topic_messages')); 
-				}); 
-			}
-		});
+		topic = $(this).data('topic');
+		updateTopic();
 	});
 	
 	
+	/**
+	 * Event listener for the 2 view options in the "discover" view of the feed
+	 */
 	$(".discover-toggle").click(function(){
 		var type = $(this).data('discover');
 		if (type === "All") {
@@ -55,7 +83,7 @@ $(document).ready(function(){
 			$('.discover-toggle[data-discover="All"]').removeClass("active");					
 		}
 		discover = type;
-		updateFeed();
+		updateDiscover();
 	});
 	
 });

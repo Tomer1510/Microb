@@ -62,6 +62,7 @@ public class InsertMessage extends HttpServlet {
 		 String nickname = (String)session.getAttribute("nickname");
 		 String content = request.getParameter("content");
 		 String topicsStr = request.getParameter("topics");
+		 Integer republishID = request.getParameter("rebulish")!=null?Integer.parseInt((request.getParameter("republish"))):null;
 		 if (nickname == null || content == null || topicsStr == null) {
 			PrintWriter writer = response.getWriter();
          	writer.println(( new servletResult("false") ).getJSONResult());
@@ -94,6 +95,16 @@ public class InsertMessage extends HttpServlet {
             	writer.println(result.getJSONResult());
             	writer.close();
     		}
+    		
+    		if (republishID != null && republishID > 0) {
+	    		PreparedStatement pstmt2 = conn.prepareStatement(AppConstants.INCREAMENT_REPUBLISHED_MESSAGE);
+	       		
+	       		pstmt2.setInt(1, republishID);
+	       		
+	       		pstmt2.executeUpdate();
+    		}
+    		
+    		
     		conn.commit();
     		
     		conn.close();

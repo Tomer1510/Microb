@@ -1,7 +1,6 @@
 $(document).ready(function(){
 	
 	
-	
 	if (urlParams.nickname === undefined && urlParams.username === undefined)
 		urlParams.nickname =  $.ajax({type: 'get', dataType: 'json', url: "IsLoggedIn", success: function(ret){return ret}, async: false }).responseJSON.value;
 	isLoggedIn(function(ret, nickname){
@@ -10,12 +9,20 @@ $(document).ready(function(){
 	});
 	var field = (urlParams.nickname === undefined)?"Username":"Nickname", 
 			value = (urlParams.nickname === undefined)?urlParams.username:urlParams.nickname;
+	
+	
+	/**
+	 * Gets the details about the user who's profile we're in
+	 * After getting the results, it also fetches other details like followees and followers for the user
+	 */
 	getUserDetails(field, value, function(ret){		
+			//Sets the follow button's text (i.e. follow or unfollow)
 			isFollowing(ret["NickName"], function(following){
 				$("#user_details .follow").text(following?"Unfollow":"Follow him!");
 			});
 			
 			
+			//Fetches the user's top 10 followees and adds them to the "following" list
 			$.ajax({
 				'type': 'POST', 
 				url: 'GetTop10Following', 
@@ -32,6 +39,8 @@ $(document).ready(function(){
 				} 
 			});
 			
+			
+			//Fetches the user's top 10 followers and adds them to the "followers" list
 			$.ajax({
 				'type': 'POST', 
 				url: 'GetTop10Followers', 
@@ -49,7 +58,9 @@ $(document).ready(function(){
 			});
 			
 			
-			
+		/**
+		 * Handles toggles for the 'follow view' (i.e. display followers or display following)
+		 */
 		$(".followButtons button").click(function(){
 			var type = $(this).data('type');
 			if (type === 'followers') {
@@ -66,7 +77,10 @@ $(document).ready(function(){
 			}
 		});
 		
+		
 		$("#user_details .follow").data('nickname', ret["NickName"]);
+		
+		// If the servlet did not return false - display the information received
 		if (ret.result === undefined) {
 			var table = $("#user_details tbody");
 			var fields = ['Username', 'NickName', 'Description'];
@@ -78,7 +92,7 @@ $(document).ready(function(){
 				table.append('<tr><td>'+field+':</td><td class="space"></td><td>'+ret[field]+'</td></tr>');
 			});
 			
-			
+			//Get the user's 10 recent messages
 			$.ajax({
 				 type: 'get', 
 				 dataType: 'json',
