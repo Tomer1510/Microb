@@ -19,13 +19,11 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Mentions;
 import model.Topics;
 
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
@@ -57,7 +55,7 @@ public class InsertMessage extends HttpServlet {
 	 * @param  HttpServletRequest request - contain the parameters of the message [author, content, mentions and topics]
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		 HttpSession session = request.getSession();
 		 String nickname = (String)session.getAttribute("nickname");
 		 String content = request.getParameter("content");
@@ -73,14 +71,11 @@ public class InsertMessage extends HttpServlet {
     		BasicDataSource ds = (BasicDataSource)context.lookup(AppConstants.DB_DATASOURCE);
     		Connection conn = ds.getConnection();
     		Gson gson = new Gson();
-    		Gson gson2 = new Gson();
-    	 	//List<Mentions> mentions = gson.fromJson(request.getParameter("mentions"), new TypeToken<List<Mentions>>(){}.getType());
-    	 	List<Topics> topics = gson2.fromJson(request.getParameter("topics"), new TypeToken<List<Topics>>(){}.getType());
+    	 	List<Topics> topics = gson.fromJson(request.getParameter("topics"), new TypeToken<List<Topics>>(){}.getType());
     		PreparedStatement pstmt = conn.prepareStatement(AppConstants.INSERT_MESSAGE_STMT, Statement.RETURN_GENERATED_KEYS);
     		
     		pstmt.setString(1, nickname);
     		pstmt.setString(2, content);
-    		//pstmt.setString(3, new Gson().toJson(mentions));
     		pstmt.setString(3, new Gson().toJson(topics));
 
     		

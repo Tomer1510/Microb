@@ -17,7 +17,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,8 +24,6 @@ import javax.servlet.http.HttpServletResponse;
 import model.Messages;
 
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
-
-
 
 /**
  * @author      Sean Man 206184798
@@ -45,12 +42,8 @@ public class GetMessage extends HttpServlet {
         super();
     }
     
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-    	doPost(request, response);
-    }
-    
     /**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 * 
 	 * Return the JSON representation of required messages by msg-ID or nickname.
 	 .
@@ -58,10 +51,12 @@ public class GetMessage extends HttpServlet {
 	 * 										and the parameter 'value' that represent the 'field' value.
 	 * @param  HttpServletResponse response - contains JSON representation of the messages.
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		 String field = request.getParameter("field"); // get 'field' parameter
-		 String value = request.getParameter("value"); // get 'value' parameter
+		String[] param = request.getPathInfo().replaceFirst("/", "").replaceAll("/", " ").split("\\s+"); // get parameters
+		String field = param[0]; // get 'field' parameter
+		String value = param[1]; // get 'value' parameter
+		
 		 if (field == null || value == null) { // sanity check
 			PrintWriter writer = response.getWriter();
          	writer.println(( new servletResult("false") ).getJSONResult());

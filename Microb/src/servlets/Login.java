@@ -10,7 +10,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,8 +19,6 @@ import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
 import general.AppConstants;
 import general.servletResult;
-
-
 
 /**
  * @author      Sean Man 206184798

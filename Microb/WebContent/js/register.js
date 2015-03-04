@@ -67,9 +67,7 @@ $(document).ready(function(){
 			$("#username_error").show();
 		if (!nickname_ok)
 			$("#nickname_error").show();
-		if ($("#register_description input[name=Description]").val().length > 50)
-			return false;
-		if (nickname_ok && username_ok && $("#register_description input[name=Description]").val().length <= 50) {
+		if (nickname_ok && username_ok) {
 			var parms = {};
 			$("#register_form input").each(function(){
 				parms[$(this).attr('name')] = $(this).val();
@@ -89,18 +87,6 @@ $(document).ready(function(){
 					}
 				} 
 			});
-		}
-	});
-	
-	
-	$("#register_description input[name=Description]").keyup(function(){
-		var len = $(this).val().length;
-		$("#register_description .letter-counter").text(len)
-		if (len > 50) {
-			$("#register_description .letter-counter").addClass('red');
-		}
-		else {
-			$("#register_description .letter-counter").removeClass('red');
 		}
 	});
 	
