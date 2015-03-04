@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.SingleThreadModel;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +16,8 @@ import javax.servlet.http.HttpSession;
  *  Performing logout action of the current user.
  */
 
-public class Logout extends HttpServlet {
+@SuppressWarnings("deprecation")
+public class Logout extends HttpServlet implements SingleThreadModel {
     private static final long serialVersionUID = 1L;
  
     /**

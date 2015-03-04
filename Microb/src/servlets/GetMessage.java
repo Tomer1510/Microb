@@ -17,6 +17,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
+import javax.servlet.SingleThreadModel;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +33,8 @@ import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
  *  return required messages by msg-ID or nickname.
  */
 
-public class GetMessage extends HttpServlet {
+@SuppressWarnings("deprecation")
+public class GetMessage extends HttpServlet implements SingleThreadModel {
 	private static final long serialVersionUID = 1L;
        
     /**

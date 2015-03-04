@@ -4,6 +4,7 @@ import general.servletResult;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.SingleThreadModel;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +17,8 @@ import javax.servlet.http.HttpSession;
  *  return whether the user is currently logged-in.
  */
 
-public class IsLoggedIn extends HttpServlet {
+@SuppressWarnings("deprecation")
+public class IsLoggedIn extends HttpServlet implements SingleThreadModel {
     private static final long serialVersionUID = 1L;
     
     /**
