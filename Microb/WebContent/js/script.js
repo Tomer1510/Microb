@@ -25,10 +25,9 @@ window.onload = function(){
 			return;
 		else {
 			$.ajax({
-				url: 'ToggleFollow',
+				url: 'ToggleFollow/'+nickname,
 				dataType: 'json',
-				type: 'POST',
-				data: {nickname: nickname},
+				type: 'GET',
 				success: function(res) {
 					if (eval(res.value) === false) {
 						$(this_).text('Follow');
@@ -66,10 +65,9 @@ var urlParams;
  */
 function isFollowing(nickname, callback) {
 	$.ajax({
-		 type: 'post', 
+		 type: 'get', 
 		 dataType: 'json',
-		 url: "IsFollowing", 
-		 data: {nickname: nickname}, 
+		 url: "IsFollowing/"+nickname, 
 		 success: function(ret){
 			 if (typeof callback === "function")
 				 callback(eval(ret.value))
@@ -192,13 +190,9 @@ function isLoggedIn(callback) {
  */
 function getUserDetails(field, value, callback) {
 	$.ajax({
-		url: 'GetUserDetails',
-		type: 'POST',
+		url: 'GetUserDetails/'+field+'/'+value,
+		type: 'GET',
 		dataType: 'json',
-		data: {
-			field: field,
-			value: value
-		},
 		async: false,
 		success: function(ret) {
 			if (typeof callback === "function") 

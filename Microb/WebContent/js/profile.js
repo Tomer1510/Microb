@@ -24,10 +24,9 @@ $(document).ready(function(){
 			
 			//Fetches the user's top 10 followees and adds them to the "following" list
 			$.ajax({
-				'type': 'POST', 
-				url: 'GetTop10Following', 
+				'type': 'GET', 
+				url: 'GetTop10Following/'+ret.NickName, 
 				dataType: 'json', 
-				data: {nickname: ret.NickName}, 
 				success: function(users){
 					users.forEach(function(user){
 						isFollowing(user.result, function(following){
@@ -41,8 +40,8 @@ $(document).ready(function(){
 			
 			//Fetches the user's top 10 followers and adds them to the "followers" list
 			$.ajax({
-				'type': 'POST', 
-				url: 'GetTop10Followers', 
+				'type': 'GET', 
+				url: 'GetTop10Followers/'+ret.NickName, 
 				dataType: 'json', 
 				data: {nickname: ret.NickName}, 
 				success: function(users){
@@ -94,8 +93,7 @@ $(document).ready(function(){
 			$.ajax({
 				 type: 'get', 
 				 dataType: 'json',
-				 url: "GetMessage", 
-				 data: {field: 'nickname', value: ret["NickName"]}, 
+				 url: "GetMessage/nickname/"+ret.NickName, 
 				 success: function(ret){
 					 $.each(ret, function(i, message) {
 						 addMessage(message); 

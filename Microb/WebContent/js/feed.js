@@ -7,10 +7,9 @@ $(document).ready(function(){
 	 */
 	function updateDiscover() {
 		$.ajax({
-			url: "GetFeed", 
+			url: "GetFeed/"+discover, 
 			dataType: 'json',
-			type: 'POST',
-			data: {returns: discover},
+			type: 'GET',
 			success: function(ret){	
 				document.getElementById('discover_messages').innerHTML = "";
 				$.each(ret, function(i, message) {
@@ -27,10 +26,9 @@ $(document).ready(function(){
 	function updateTopic() {
 		if (topic !== "") {		
 			$.ajax({
-				url: "GetMessagesOfTopic",
+				url: "GetMessagesOfTopic/"+topic,
 				dataType: 'json',
-				type: 'POST',
-				data: {topic: topic},
+				type: 'GET',
 				success: function(messages){
 					document.getElementById('topic_messages').innerHTML = "";
 					$.each(messages, function(i, message) {

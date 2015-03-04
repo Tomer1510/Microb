@@ -26,7 +26,7 @@ $(document).ready(function(){
 	var nickname_ok = false; //Used for nickname validation
 	
 	//Handles real-time nickname & username validation (checks for duplicates)
-	$('input[name="Username"], input[name="Nickname"]').keyup(function(){
+	$('#register_form input[name="Username"], #register_form input[name="Nickname"]').keyup(function(){
 		var field = $(this).attr('name');
 		var value = $(this).val().trim();
 		var this_ = $(this);
@@ -39,9 +39,8 @@ $(document).ready(function(){
 		else { //If not empty - check if it's taken or available, and indicate the result to the user
 			$.ajax({
 				dataType: 'json',
-				type:'POST',
-				url:"checkAvailablity", 
-				data: {field: field, value: value},
+				type:'GET',
+				url:"checkAvailablity/"+field+"/"+value, 
 				success: function(result){
 					if (result['result']=="AVAILABLE") {
 						$("#register_"+field.toLowerCase()).attr('class', 'has-feedback has-success');
