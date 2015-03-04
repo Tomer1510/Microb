@@ -1,11 +1,11 @@
 $(document).ready(function(){
-	
+	var discover = "All";
 	function updateFeed() {
 		$.ajax({
 			url: "GetFeed", 
 			dataType: 'json',
 			type: 'POST',
-			data: {returns: 'Following'},
+			data: {returns: discover},
 			success: function(ret){	
 				document.getElementById('discover_messages').innerHTML = "";
 				$.each(ret, function(i, message) {
@@ -41,6 +41,21 @@ $(document).ready(function(){
 				}); 
 			}
 		});
+	});
+	
+	
+	$(".discover-toggle").click(function(){
+		var type = $(this).data('discover');
+		if (type === "All") {
+			$(this).addClass('active');
+			$('.discover-toggle[data-discover="Following"]').removeClass("active");
+		}
+		else if (type === "Following") {
+			$(this).addClass('active');
+			$('.discover-toggle[data-discover="All"]').removeClass("active");					
+		}
+		discover = type;
+		updateFeed();
 	});
 	
 });
