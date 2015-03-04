@@ -27,10 +27,10 @@ import model.Messages;
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
 /**
+ * return required messages by topic.
+ * 
  * @author      Sean Man 206184798
  * @author		Tomer Eiges 315818948
- * 
- *  return required messages by topic.
  */
 @SuppressWarnings("deprecation")
 public class GetMessagesOfTopic extends HttpServlet implements SingleThreadModel {

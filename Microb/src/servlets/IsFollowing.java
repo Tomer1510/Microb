@@ -25,10 +25,10 @@ import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
 
 /**
+ * return whether the current user is following after some user.
+ * 
  * @author      Sean Man 206184798
  * @author		Tomer Eiges 315818948
- * 
- *  return whether the current user is following after some user.
  */
 
 @SuppressWarnings("deprecation")

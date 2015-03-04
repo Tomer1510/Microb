@@ -4,10 +4,10 @@
 package model;
 
 /**
+ * represent user
+ * 
  * @author      Sean Man 206184798
  * @author		Tomer Eiges 315818948
- * 
- * represent user
  */
 public class Users {
 

@@ -1,10 +1,10 @@
 package model;
 
 /**
+ * represent a topic in user's message
+ * 
  * @author      Sean Man 206184798
  * @author		Tomer Eiges 315818948
- * 
- * represent a topic in user's message
  */
 
 public class Topics {

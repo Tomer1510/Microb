@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * return whether the user is currently logged-in.
+ * 
  * @author      Sean Man 206184798
  * @author		Tomer Eiges 315818948
- * 
- *  return whether the user is currently logged-in.
  */
 
 @SuppressWarnings("deprecation")

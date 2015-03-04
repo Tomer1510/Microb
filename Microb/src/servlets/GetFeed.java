@@ -28,10 +28,10 @@ import model.Messages;
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
 /**
+ * return users DISCOVERY messages as defined in the requirements doc.
+ * 
  * @author      Sean Man 206184798
  * @author		Tomer Eiges 315818948
- * 
- *  return users DISCOVERY messages as defined in the requirements doc.
  */
 
 @SuppressWarnings("deprecation")

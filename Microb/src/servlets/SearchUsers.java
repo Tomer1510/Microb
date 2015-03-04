@@ -27,10 +27,10 @@ import model.Users;
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
 /**
+ * return list of users that match given keyword.
+ * 
  * @author      Sean Man 206184798
  * @author		Tomer Eiges 315818948
- * 
- *  return list of users that match given keyword.
  */
 
 @SuppressWarnings("deprecation")

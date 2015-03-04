@@ -21,10 +21,10 @@ import general.AppConstants;
 import general.servletResult;
 
 /**
+ * return whether the username/nickname is available for registration.
+ * 
  * @author      Sean Man 206184798
  * @author		Tomer Eiges 315818948
- * 
- *  return whether the username/nickname is available for registration.
  */
 @SuppressWarnings("deprecation")
 public class IsAvailableForRegistration extends HttpServlet implements SingleThreadModel {

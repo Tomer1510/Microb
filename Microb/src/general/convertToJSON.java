@@ -10,6 +10,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 /**
+ * Return the JSON representation of objects
+ * 
  * @author      Sean Man 206184798
  * @author		Tomer Eiges 315818948
  */

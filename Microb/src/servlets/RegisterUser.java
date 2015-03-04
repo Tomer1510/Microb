@@ -22,10 +22,10 @@ import general.AppConstants;
 import general.servletResult;
 
 /**
+ * performing registration for new user.
+ * 
  * @author      Sean Man 206184798
  * @author		Tomer Eiges 315818948
- * 
- *  performing registration for new user.
  */
 @SuppressWarnings("deprecation")
 public class RegisterUser extends HttpServlet implements SingleThreadModel {

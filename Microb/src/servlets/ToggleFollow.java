@@ -23,10 +23,10 @@ import javax.servlet.http.HttpSession;
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
 /**
+ * add or remove following of user after other user.
+ * 
  * @author      Sean Man 206184798
  * @author		Tomer Eiges 315818948
- * 
- *  add or remove following of user after other user.
  */
 
 @SuppressWarnings("deprecation")

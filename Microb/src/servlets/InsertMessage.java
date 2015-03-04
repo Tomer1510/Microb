@@ -31,10 +31,10 @@ import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
 
 /**
+ * insert new message to the DB
+ * 
  * @author      Sean Man 206184798
  * @author		Tomer Eiges 315818948
- * 
- *  insert new message to the DB
  */
 
 @SuppressWarnings("deprecation")

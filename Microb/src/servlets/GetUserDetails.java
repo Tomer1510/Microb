@@ -25,10 +25,10 @@ import model.Users;
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
 /**
+ * return details of required user.
+ * 
  * @author      Sean Man 206184798
  * @author		Tomer Eiges 315818948
- * 
- *  return details of required user.
  */
 @SuppressWarnings("deprecation")
 public class GetUserDetails extends HttpServlet implements SingleThreadModel {

@@ -22,10 +22,10 @@ import general.AppConstants;
 import general.servletResult;
 
 /**
+ * Authenticate user in front of the server.
+ * 
  * @author      Sean Man 206184798
  * @author		Tomer Eiges 315818948
- * 
- *  Authenticate user in front of the server.
  */
 
 @SuppressWarnings("deprecation")
