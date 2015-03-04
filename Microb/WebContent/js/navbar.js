@@ -44,7 +44,7 @@ var navbar_init = function() {
 		
 		//Pre-process topics in the message so they can be stored in the database
 		var topics = [];
-		text.split(" ").forEach(function(word){
+		text.split(/[\s\n]+/).forEach(function(word){
 			if(word[0] === '#' && word.length > 1)
 				topics.push({'topic': word.substr(1).trim()});
 		});

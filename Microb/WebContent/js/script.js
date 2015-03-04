@@ -110,8 +110,7 @@ function parseTopics(message) {
 	while ((index = subtext.indexOf("#")) !== -1) {
 		offset+=index;
 		subtext = subtext.substr(index);
-		subtext.replace("\n", "\n ");
-		var topic = subtext.split(" ")[0];
+		var topic = subtext.split(/[\s\n]+/)[0];
 		message = message.substring(0, offset)  + "<span class=\"topic\" data-topic=\""+topic.substr(1).trim()+"\">" + topic + "</span>" + message.substring(offset+topic.length);
 		subtext = subtext.substr(topic.length);
 		offset += topic.length + 41 + topic.length - 1;
@@ -130,7 +129,7 @@ function parseMentions(message) {
 	while ((index = subtext.indexOf("@")) !== -1)  {
 		offset+=index;
 		subtext = subtext.substr(index);
-		var mention = subtext.split(" ")[0];
+		var mention = subtext.split(/[\s\n]+/)[0];
 		getUserDetails("Nickname", mention.substr(1).trim(), function(details){
 			if (details.result === undefined) {
 				message = message.substring(0, offset)  + "<a class=\"mention\" href=\"profile.html?nickname="+mention.substr(1).trim()+"\">" + mention + "</a>" + message.substring(offset+mention.length);
