@@ -465,6 +465,13 @@ float: left;
 	max-width: 100%;
 }
 
+
+.col-md-height {
+	display: block !important;
+}
+
+
+
 }
 
 #login {
