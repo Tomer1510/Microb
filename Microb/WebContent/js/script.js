@@ -80,7 +80,7 @@ function parseTopics(message) {
 		offset+=index;
 		subtext = subtext.substr(index);
 		var topic = subtext.split(" ")[0];
-		message = message.substring(0, offset)  + "<span class=\"topic\" data-topic=\""+topic.substr(1)+"\">" + topic + "</span>" + message.substring(offset+topic.length);
+		message = message.substring(0, offset)  + "<span class=\"topic\" data-topic=\""+topic.substr(1).trim()+"\">" + topic + "</span>" + message.substring(offset+topic.length);
 		subtext = subtext.substr(topic.length);
 		offset += topic.length + 41 + topic.length - 1;
 	}
@@ -88,13 +88,39 @@ function parseTopics(message) {
 }
 
 
+function parseMentions(message) {
+	var subtext = message, index, offset=0;
+	while ((index = subtext.indexOf("@")) !== -1)  {
+		offset+=index;
+		subtext = subtext.substr(index);
+		var mention = subtext.split(" ")[0];
+		console.log(mention.substr(1).trim());
+		getUserDetails("Nickname", mention.substr(1).trim(), function(details){
+			if (details.result === undefined) {
+				message = message.substring(0, offset)  + "<a class=\"mention\" href=\"profile.html?nickname="+mention.substr(1).trim()+"\">" + mention + "</a>" + message.substring(offset+mention.length);
+				subtext = subtext.substr(mention.length);
+				offset += mention.length + 53 + mention.substr(1).trim().length;
+			}
+			else {
+				offset += mention.length;
+				subtext = subtext.substr(mention.length);
+			}
+
+			
+		});
+		
+	}
+	return message;
+}
+
 function addMessage(message, div) {
 	if (div === undefined)
 		div = document.getElementById('messages');
 	message.timestamp = parseTime(message.timestamp);
 	var content = message.content;
 	content = parseTopics(content);
-	var newMsg = '<div class = "col-md-12 panel panel-default message">'
+	content = parseMentions(content);
+	var newMsg = '<div class = "col-md-12 panel panel-default message" data-id="'+message.messageID+'">'
 		+'<div class="panel-body"><div class="panel-header"><div style="display: inline-block;"><a href="profile.html?nickname='+message.authorNickname+'">@'+message.authorNickname+'</a></div><div style="float: right; display: inline-block;">'+message.timestamp+'</div></div><hr>'
 		+'<div class="message-content">'+content+'</div><br><br><button class="btn btn-default republish" data-toggle="modal" data-target="#newPost">Republish</button></div></div>';
 	
@@ -134,6 +160,7 @@ function getUserDetails(field, value, callback) {
 			field: field,
 			value: value
 		},
+		async: false,
 		success: function(ret) {
 			if (typeof callback === "function") 
 				callback(ret);

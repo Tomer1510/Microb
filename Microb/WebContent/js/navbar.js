@@ -1,7 +1,7 @@
 
 var navbar_init = function() {
 	var mentions = [];
-	
+	var republish = 0;
 	
 	isLoggedIn(function(ret, nickname){
 		if (ret === false) {
@@ -78,6 +78,7 @@ var navbar_init = function() {
 				topics.push({'topic': word.substr(1)});
 		});
 		$(this).append(addHiddenElm("topics", topics));
+		$(this).append(addHiddenElm("republish", republish));
 	});
 	
 	$("#post-form textarea[name=content]").keyup(function(){
@@ -94,7 +95,13 @@ var navbar_init = function() {
 	$("body").on('click', '.republish', function(){
 		var originalMessage = $(this).parent().find('.message-content').text();
 		$("#post-form textarea[name=content]").val("RE: "+originalMessage+"\n").keyup();
+		republish = $(this).parents('.message').data('id');
 	
 	});
+	
+	$('#post-form button[data-dismiss="modal"]').click(function(){
+		console.log("test");
+		republish = 0;
+	})
 	
 };
